@@ -79,26 +79,37 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                    ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50'
-                    : 'bg-white/80 backdrop-blur-sm'
-                }`}
+            className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+            style={{
+              background: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
+              backdropFilter: scrolled ? 'blur(12px)' : 'none',
+              borderBottom: scrolled ? '1px solid rgba(0,0,0,0.07)' : '1px solid transparent',
+              boxShadow: scrolled ? '0 1px 24px rgba(0,0,0,0.06)' : 'none',
+            }}
         >
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-                <div className="flex items-center justify-between h-[72px]">
-                    {/* Logo */}
-                    <a href="#" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-teal to-trust-blue rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                            <span className="text-white font-bold text-lg">P</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xl font-bold text-navy tracking-tight">Península</span>
-                            <span className="text-[10px] font-semibold text-teal tracking-[0.3em] uppercase -mt-1">Ortopedia & Deportiva</span>
-                        </div>
+            <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', height: 72, gap: 48 }}>
+
+                    {/* ── Logo — far left, standard anchor ── */}
+                    <a href="#" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', flexShrink: 0, marginRight: 'auto' }}>
+                        <span style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: '1.35rem', fontWeight: 400, letterSpacing: '.02em',
+                            lineHeight: 1,
+                            color: scrolled ? '#1C1917' : '#fff',
+                            transition: 'color .4s',
+                        }}>Península OC</span>
+                        <span style={{
+                            fontFamily: "'Jost', sans-serif",
+                            fontSize: '.58rem', fontWeight: 300,
+                            letterSpacing: '.22em', textTransform: 'uppercase',
+                            color: scrolled ? 'rgba(0,137,123,.9)' : 'rgba(255,255,255,.5)',
+                            marginTop: 3, transition: 'color .4s',
+                        }}>Ortopedia & Deportiva</span>
                     </a>
 
-                    {/* Desktop Nav */}
-                    <nav className="hidden lg:flex items-center gap-1">
+                    {/* ── Nav — centered ── */}
+                    <nav className="hidden lg:flex items-center" style={{ gap: 6 }}>
                         {navItems.map((item) => (
                             <div
                                 key={item.label}
@@ -108,32 +119,58 @@ export default function Header() {
                             >
                                 <a
                                     href={item.href || '#'}
-                                    className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy transition-colors rounded-lg hover:bg-gray-100/60 flex items-center gap-1"
+                                    style={{
+                                        fontFamily: "'Jost', sans-serif",
+                                        fontSize: '.65rem', fontWeight: 300,
+                                        letterSpacing: '.14em', textTransform: 'uppercase',
+                                        color: scrolled ? 'rgba(44,40,36,.7)' : 'rgba(255,255,255,.65)',
+                                        padding: '8px 14px',
+                                        display: 'inline-flex', alignItems: 'center', gap: 5,
+                                        textDecoration: 'none',
+                                        transition: 'color .2s',
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.color = scrolled ? '#1C1917' : '#fff'}
+                                    onMouseLeave={e => e.currentTarget.style.color = scrolled ? 'rgba(44,40,36,.7)' : 'rgba(255,255,255,.65)'}
                                 >
                                     {item.label}
                                     {item.hasMegaMenu && (
-                                        <svg className={`w-4 h-4 transition-transform ${megaOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                            style={{ transition: 'transform .2s', transform: megaOpen ? 'rotate(180deg)' : 'none' }}>
+                                            <path d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     )}
                                 </a>
 
                                 {/* Mega Menu */}
                                 {item.hasMegaMenu && megaOpen && (
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 animate-slide-down" style={{ width: '700px' }}>
-                                        <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-3 gap-4">
-                                            {megaMenuItems.map((mi) => (
-                                                <a
-                                                    key={mi.title}
-                                                    href="#"
-                                                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-off-white transition-colors group/item"
+                                    <div style={{
+                                        position: 'absolute', top: '100%', left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        width: '100vw',
+                                        background: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
+                                        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+                                        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+                                        borderBottom: scrolled ? '1px solid rgba(0,0,0,.07)' : '1px solid rgba(255,255,255,.08)',
+                                        boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,.07)' : 'none',
+                                        zIndex: 100,
+                                    }}>
+                                        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '20px clamp(20px,4vw,56px)', display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 0 }}>
+                                            {megaMenuItems.map((mi, idx) => (
+                                                <a key={mi.title} href="#"
+                                                    style={{
+                                                        display: 'flex', alignItems: 'flex-start', gap: 12,
+                                                        padding: '14px 18px',
+                                                        textDecoration: 'none',
+                                                        borderLeft: idx > 0 ? (scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.1)') : 'none',
+                                                        transition: 'background .15s',
+                                                    }}
+                                                    onMouseEnter={e => e.currentTarget.style.background = scrolled ? 'rgba(0,0,0,.03)' : 'rgba(255,255,255,.05)'}
+                                                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                                                 >
-                                                    <div className="text-teal group-hover/item:text-trust-blue transition-colors flex-shrink-0 mt-0.5">
-                                                        {mi.icon}
-                                                    </div>
+                                                    <div style={{ color: '#00BFA6', flexShrink: 0, marginTop: 2 }}>{mi.icon}</div>
                                                     <div>
-                                                        <div className="font-semibold text-sm text-navy">{mi.title}</div>
-                                                        <div className="text-xs text-gray-500 mt-0.5 leading-relaxed">{mi.desc}</div>
+                                                        <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:400, color: scrolled ? '#1C1917' : 'rgba(255,255,255,.9)', letterSpacing:'.02em', marginBottom: 3 }}>{mi.title}</div>
+                                                        <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.62rem', fontWeight:300, color: scrolled ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.45)', lineHeight:1.5 }}>{mi.desc}</div>
                                                     </div>
                                                 </a>
                                             ))}
@@ -144,55 +181,60 @@ export default function Header() {
                         ))}
                     </nav>
 
-                    {/* CTA + Mobile toggle */}
-                    <div className="flex items-center gap-3">
-                        <a
-                            href="#contacto"
-                            className="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-teal to-teal-dark text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-lg shadow-teal/25 hover:shadow-xl hover:shadow-teal/30 hover:-translate-y-0.5 transition-all duration-200"
+                    {/* ── Right — phone number only ── */}
+                    <div className="hidden lg:flex items-center" style={{ gap: 8, flexShrink: 0, marginLeft: 'auto' }}>
+                        <a href="tel:6865510099" style={{
+                            fontFamily: "'Jost', sans-serif",
+                            fontSize: '.72rem', fontWeight: 300,
+                            letterSpacing: '.08em',
+                            color: scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)',
+                            textDecoration: 'none',
+                            transition: 'color .2s',
+                            display: 'flex', alignItems: 'center', gap: 8,
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.color = scrolled ? '#1C1917' : '#fff'}
+                        onMouseLeave={e => e.currentTarget.style.color = scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)'}
                         >
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
                             </svg>
-                            Agendar Cita
+                            686 551 0099
                         </a>
-
-                        {/* Hamburger */}
-                        <button
-                            className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
-                            onClick={() => setMobileOpen(!mobileOpen)}
-                            aria-label="Abrir menú"
-                        >
-                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                {mobileOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
-                        </button>
                     </div>
+
+                    {/* Hamburger — mobile only */}
+                    <button
+                        className="lg:hidden ml-auto p-2"
+                        onClick={() => setMobileOpen(!mobileOpen)}
+                        aria-label="Abrir menú"
+                        style={{ color: scrolled ? '#1C1917' : '#fff', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                            {mobileOpen
+                                ? <><path d="M6 18L18 6"/><path d="M6 6l12 12"/></>
+                                : <><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></>
+                            }
+                        </svg>
+                    </button>
+
                 </div>
             </div>
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div className="lg:hidden bg-white border-t border-gray-100 animate-slide-down">
-                    <div className="px-6 py-4 space-y-1">
+                <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,.07)' }}>
+                    <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {navItems.map((item) => (
-                            <a
-                                key={item.label}
-                                href={item.href || '#'}
-                                className="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-50 rounded-lg transition-colors"
+                            <a key={item.label} href={item.href || '#'}
+                                style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:300, letterSpacing:'.12em', textTransform:'uppercase', color:'rgba(44,40,36,.7)', padding:'12px 8px', textDecoration:'none', borderBottom:'1px solid rgba(0,0,0,.05)' }}
                                 onClick={() => setMobileOpen(false)}
-                            >
-                                {item.label}
-                            </a>
+                            >{item.label}</a>
                         ))}
-                        <a
-                            href="#contacto"
-                            className="block mt-3 text-center bg-gradient-to-r from-teal to-teal-dark text-white font-semibold text-sm px-6 py-3 rounded-full"
+                        <a href="tel:6865510099"
+                            style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:300, letterSpacing:'.16em', textTransform:'uppercase', color:'#1C1917', padding:'14px 8px', textDecoration:'none', display:'flex', alignItems:'center', gap:8, marginTop:8, border:'1px solid rgba(28,25,23,.25)' }}
                         >
-                            Agendar Cita
+                            <span style={{ width:6, height:6, borderRadius:'50%', background:'#4ADE80', display:'inline-block' }} />
+                            Contactar Clínica
                         </a>
                     </div>
                 </div>

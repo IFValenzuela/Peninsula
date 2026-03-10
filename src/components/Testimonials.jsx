@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 const testimonials = [
     {
         name: 'Alejandro Ruiz', age: 34,
-        diagnosis: 'Reconstrucción Compleja de LCA', sport: 'Fútbol Amateur',
+        diagnosis: 'Reconstrucción de LCA', sport: 'Fútbol Amateur',
         quote: 'Después de romperme el ligamento cruzado en un partido, pensé que no volvería a jugar. El Dr. Mendoza no solo reconstruyó mi rodilla, sino mi confianza. A los 8 meses ya estaba de vuelta en la cancha.',
         timeframe: '8 meses de recuperación',
     },
@@ -42,63 +42,141 @@ export default function Testimonials() {
     const t = testimonials[current];
 
     return (
-        <section className="py-24 bg-off-white" id="testimonios">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-                <div className="text-center mb-16">
-                    <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">Testimonios</span>
-                    <h2 className="text-4xl lg:text-5xl font-bold text-navy tracking-tight">Historias de Regreso</h2>
-                    <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">Cada paciente tiene una historia de superación. Estas son algunas de las que nos inspiran cada día.</p>
+        <section className="bg-white" id="testimonios" style={{ padding: 'clamp(64px,8vw,112px) clamp(20px,4vw,56px)' }}>
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Jost:wght@200;300;400&display=swap');
+                .tm-nav-btn {
+                    width: 38px; height: 38px;
+                    border: 1px solid rgba(0,0,0,.15);
+                    background: transparent;
+                    display: flex; align-items: center; justify-content: center;
+                    cursor: pointer;
+                    transition: border-color .2s, background .2s;
+                }
+                .tm-nav-btn:hover { border-color: rgba(0,0,0,.4); background: rgba(0,0,0,.03); }
+            `}</style>
+
+            <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+
+                {/* Header */}
+                <div style={{ marginBottom: 56 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                        <div style={{ width: 24, height: 1, background: '#00BFA6' }} />
+                        <span style={{
+                            fontFamily: "'Jost', sans-serif",
+                            fontSize: '.62rem', fontWeight: 300,
+                            letterSpacing: '.22em', textTransform: 'uppercase',
+                            color: '#00BFA6',
+                        }}>Testimonios</span>
+                    </div>
+                    <h2 style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 'clamp(2.2rem,4vw,3.4rem)',
+                        fontWeight: 300, color: '#1C1917',
+                        letterSpacing: '-.02em', lineHeight: 1.1,
+                        margin: 0,
+                    }}>Experiencias de nuestros pacientes.</h2>
                 </div>
-                <div className="relative max-w-5xl mx-auto" onMouseEnter={() => setAuto(false)} onMouseLeave={() => setAuto(true)}>
-                    <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                        <div className="grid lg:grid-cols-5">
-                            <div className="lg:col-span-2 bg-gradient-to-br from-navy to-trust-blue p-10 flex flex-col justify-center text-white">
-                                <div className="mb-6">
-                                    <div className="w-20 h-20 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center mb-6">
-                                        <span className="text-3xl font-bold text-teal">{t.name.charAt(0)}</span>
-                                    </div>
-                                    <h3 className="text-2xl font-bold">{t.name}</h3>
-                                    <p className="text-white/60 text-sm mt-1">{t.age} años</p>
+
+                {/* Testimonial */}
+                <div
+                    style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 0, border: '1px solid rgba(0,0,0,.09)', boxShadow: '0 8px 48px rgba(0,0,0,.08), 0 2px 12px rgba(0,0,0,.04)' }}
+                    onMouseEnter={() => setAuto(false)}
+                    onMouseLeave={() => setAuto(true)}
+                >
+                    {/* Left — patient info */}
+                    <div style={{
+                        padding: 'clamp(32px,4vw,52px)',
+                        background: '#FAFAF9',
+                        borderRight: '1px solid rgba(0,0,0,.09)',
+                        display: 'flex', flexDirection: 'column', gap: 32,
+                    }}>
+                        {/* Name */}
+                        <div>
+                            <div style={{
+                                fontFamily: "'Cormorant Garamond', serif",
+                                fontSize: '1.6rem', fontWeight: 300,
+                                color: '#1C1917', lineHeight: 1.2, marginBottom: 4,
+                            }}>{t.name}</div>
+                            <div style={{
+                                fontFamily: "'Jost', sans-serif",
+                                fontSize: '.68rem', fontWeight: 300,
+                                color: 'rgba(0,0,0,.35)', letterSpacing: '.06em',
+                            }}>{t.age} años</div>
+                        </div>
+
+                        {/* Details */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderTop: '1px solid rgba(0,0,0,.08)' }}>
+                            {[
+                                { label: 'Diagnóstico', value: t.diagnosis },
+                                { label: 'Actividad', value: t.sport },
+                                { label: 'Resultado', value: t.timeframe, accent: true },
+                            ].map((row, i) => (
+                                <div key={i} style={{
+                                    padding: '16px 0',
+                                    borderBottom: '1px solid rgba(0,0,0,.08)',
+                                }}>
+                                    <div style={{
+                                        fontFamily: "'Jost', sans-serif",
+                                        fontSize: '.58rem', fontWeight: 300,
+                                        letterSpacing: '.14em', textTransform: 'uppercase',
+                                        color: 'rgba(0,0,0,.35)', marginBottom: 5,
+                                    }}>{row.label}</div>
+                                    <div style={{
+                                        fontFamily: "'Jost', sans-serif",
+                                        fontSize: '.8rem', fontWeight: 400,
+                                        color: row.accent ? '#00897B' : '#1C1917',
+                                    }}>{row.value}</div>
                                 </div>
-                                <div className="space-y-4">
-                                    <div className="bg-white/10 rounded-xl p-4">
-                                        <div className="text-xs text-white/50 uppercase tracking-wider mb-1">Diagnóstico</div>
-                                        <div className="font-semibold text-sm">{t.diagnosis}</div>
-                                    </div>
-                                    <div className="bg-white/10 rounded-xl p-4">
-                                        <div className="text-xs text-white/50 uppercase tracking-wider mb-1">Deporte</div>
-                                        <div className="font-semibold text-sm">{t.sport}</div>
-                                    </div>
-                                    <div className="bg-teal/20 border border-teal/30 rounded-xl p-4">
-                                        <div className="text-xs text-teal uppercase tracking-wider mb-1">Resultado</div>
-                                        <div className="font-semibold text-sm text-teal-light">{t.timeframe}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="lg:col-span-3 p-10 lg:p-14 flex flex-col justify-center">
-                                <svg className="w-12 h-12 text-teal/20 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
+                            ))}
+                        </div>
+
+                        {/* Dots */}
+                        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                            {testimonials.map((_, i) => (
+                                <button key={i} onClick={() => setCurrent(i)} style={{
+                                    width: i === current ? 24 : 6,
+                                    height: 6,
+                                    background: i === current ? '#00897B' : 'rgba(0,0,0,.15)',
+                                    border: 'none', cursor: 'pointer', padding: 0,
+                                    transition: 'width .3s, background .3s',
+                                }} />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right — quote */}
+                    <div style={{
+                        padding: 'clamp(32px,5vw,64px)',
+                        display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                        gap: 40,
+                    }}>
+                        <blockquote style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: 'clamp(1.3rem, 2vw, 1.75rem)',
+                            fontWeight: 300, fontStyle: 'italic',
+                            color: '#1C1917', lineHeight: 1.6,
+                            margin: 0,
+                        }}>
+                            "{t.quote}"
+                        </blockquote>
+
+                        {/* Nav */}
+                        <div style={{ display: 'flex', gap: 8 }}>
+                            <button onClick={prev} className="tm-nav-btn" aria-label="Anterior">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1917" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M15 19l-7-7 7-7"/>
                                 </svg>
-                                <blockquote className="text-xl lg:text-2xl text-navy leading-relaxed font-normal italic">&ldquo;{t.quote}&rdquo;</blockquote>
-                                <div className="mt-10 flex items-center justify-between">
-                                    <div className="flex gap-2">
-                                        {testimonials.map((_, i) => (
-                                            <button key={i} onClick={() => setCurrent(i)} className={`h-2 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-teal' : 'w-2 bg-gray-300 hover:bg-gray-400'}`} aria-label={`Testimonio ${i + 1}`} />
-                                        ))}
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button onClick={prev} className="w-10 h-10 rounded-full border border-gray-200 hover:border-teal hover:bg-teal-light flex items-center justify-center transition-all" aria-label="Anterior">
-                                            <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-                                        </button>
-                                        <button onClick={next} className="w-10 h-10 rounded-full border border-gray-200 hover:border-teal hover:bg-teal-light flex items-center justify-center transition-all" aria-label="Siguiente">
-                                            <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            </button>
+                            <button onClick={next} className="tm-nav-btn" aria-label="Siguiente">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1C1917" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     );

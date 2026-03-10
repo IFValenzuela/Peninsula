@@ -43,20 +43,17 @@ const credentials = [
 
 export default function CredibilityBar() {
     return (
-        <section className="relative z-10 bg-navy">
+        <section className="bg-white border-t border-gray-100">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
                     {credentials.map((item, i) => (
-                        <div
-                            key={i}
-                            className="flex items-start gap-4 px-6 py-8 group hover:bg-white/5 transition-colors"
-                        >
+                        <div key={i} className="flex items-start gap-4 px-6 py-8 group hover:bg-gray-50 transition-colors">
                             <div className="text-teal flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
                                 {item.icon}
                             </div>
                             <div>
-                                <h3 className="font-semibold text-white text-sm leading-snug">{item.title}</h3>
-                                <p className="text-white/50 text-xs mt-1 leading-relaxed">{item.desc}</p>
+                                <h3 className="font-semibold text-navy text-sm leading-snug">{item.title}</h3>
+                                <p className="text-gray-500 text-xs mt-1 leading-relaxed">{item.desc}</p>
                             </div>
                         </div>
                     ))}

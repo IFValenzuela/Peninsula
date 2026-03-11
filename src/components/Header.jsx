@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const navItems = [
     {
@@ -69,6 +69,9 @@ const megaMenuItems = [
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [megaOpen, setMegaOpen] = useState(false);
+    const megaTimer = useRef(null);
+    const openMega = () => { clearTimeout(megaTimer.current); setMegaOpen(true); };
+    const closeMega = () => { megaTimer.current = setTimeout(() => setMegaOpen(false), 180); };
     const [mobileOpen, setMobileOpen] = useState(false);
 
     useEffect(() => {
@@ -90,22 +93,18 @@ export default function Header() {
             <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', height: 72, gap: 48 }}>
 
-                    {/* ── Logo — far left, standard anchor ── */}
-                    <a href="#" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', flexShrink: 0, marginRight: 'auto' }}>
-                        <span style={{
-                            fontFamily: "'Cormorant Garamond', serif",
-                            fontSize: '1.35rem', fontWeight: 400, letterSpacing: '.02em',
-                            lineHeight: 1,
-                            color: scrolled ? '#1C1917' : '#fff',
-                            transition: 'color .4s',
-                        }}>Península OC</span>
-                        <span style={{
-                            fontFamily: "'Jost', sans-serif",
-                            fontSize: '.58rem', fontWeight: 300,
-                            letterSpacing: '.22em', textTransform: 'uppercase',
-                            color: scrolled ? 'rgba(0,137,123,.9)' : 'rgba(255,255,255,.5)',
-                            marginTop: 3, transition: 'color .4s',
-                        }}>Ortopedia & Deportiva</span>
+                    {/* ── Logo — far left ── */}
+                    <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, marginRight: 'auto' }}>
+                        <img
+                            src={scrolled ? '/LogoWhite.png' : '/Logo.png'}
+                            alt="Península OC"
+                            style={{
+                                height: 40,
+                                width: 'auto',
+                                objectFit: 'contain',
+                                transition: 'opacity .3s',
+                            }}
+                        />
                     </a>
 
                     {/* ── Nav — centered ── */}
@@ -114,8 +113,8 @@ export default function Header() {
                             <div
                                 key={item.label}
                                 className="relative"
-                                onMouseEnter={() => item.hasMegaMenu && setMegaOpen(true)}
-                                onMouseLeave={() => item.hasMegaMenu && setMegaOpen(false)}
+                                onMouseEnter={() => item.hasMegaMenu && openMega()}
+                                onMouseLeave={() => item.hasMegaMenu && closeMega()}
                             >
                                 <a
                                     href={item.href || '#'}
@@ -143,15 +142,14 @@ export default function Header() {
 
                                 {/* Mega Menu */}
                                 {item.hasMegaMenu && megaOpen && (
-                                    <div style={{
-                                        position: 'absolute', top: '100%', left: '50%',
-                                        transform: 'translateX(-50%)',
-                                        width: '100vw',
-                                        background: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
-                                        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-                                        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+                                    <div onMouseEnter={openMega} onMouseLeave={closeMega} style={{
+                                        position: 'fixed', top: 68, left: 0, right: 0, paddingTop: 4,
+                                        background: scrolled ? '#fff' : 'transparent',
+                                        backdropFilter: 'none',
+                                        WebkitBackdropFilter: 'none',
+                                        borderTop: scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.08)',
                                         borderBottom: scrolled ? '1px solid rgba(0,0,0,.07)' : '1px solid rgba(255,255,255,.08)',
-                                        boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,.07)' : 'none',
+                                        boxShadow: 'none',
                                         zIndex: 100,
                                     }}>
                                         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '20px clamp(20px,4vw,56px)', display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 0 }}>
@@ -164,13 +162,13 @@ export default function Header() {
                                                         borderLeft: idx > 0 ? (scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.1)') : 'none',
                                                         transition: 'background .15s',
                                                     }}
-                                                    onMouseEnter={e => e.currentTarget.style.background = scrolled ? 'rgba(0,0,0,.03)' : 'rgba(255,255,255,.05)'}
+                                                    onMouseEnter={e => e.currentTarget.style.background = scrolled ? 'rgba(0,0,0,.03)' : 'rgba(255,255,255,.07)'}
                                                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                                                 >
                                                     <div style={{ color: '#00BFA6', flexShrink: 0, marginTop: 2 }}>{mi.icon}</div>
                                                     <div>
                                                         <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:400, color: scrolled ? '#1C1917' : 'rgba(255,255,255,.9)', letterSpacing:'.02em', marginBottom: 3 }}>{mi.title}</div>
-                                                        <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.62rem', fontWeight:300, color: scrolled ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.45)', lineHeight:1.5 }}>{mi.desc}</div>
+                                                        <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.62rem', fontWeight:300, color: scrolled ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.42)', lineHeight:1.5 }}>{mi.desc}</div>
                                                     </div>
                                                 </a>
                                             ))}
@@ -222,7 +220,7 @@ export default function Header() {
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,.07)' }}>
+                <div style={{ background: scrolled ? '#fff' : 'transparent', borderTop: '1px solid rgba(0,0,0,.07)' }}>
                     <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {navItems.map((item) => (
                             <a key={item.label} href={item.href || '#'}

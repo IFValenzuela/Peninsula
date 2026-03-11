@@ -92,6 +92,9 @@ export default function Hero() {
 
         .cx-bob { animation: cx-bob 2.8s ease-in-out infinite; }
         .cx-live { animation: cx-pulse-dot 2.2s ease infinite; }
+        .cx-float-info { display: block; }
+        @media (max-width: 900px) { .cx-float-info { display: none; } }
+        @media (min-width: 1600px) { .cx-float-info { right: 80px !important; } }
 
         /* Primary CTA */
         .cx-cta {
@@ -149,10 +152,13 @@ export default function Hero() {
           box-shadow: 0 4px 40px rgba(0,0,0,.4);
         }
 
-        @media (max-width: 768px) {
-          .cx-h1-line { font-size: clamp(3.2rem, 12vw, 5rem) !important; }
-          .cx-bottom-bar { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+        @media (max-width: 900px) {
+          .cx-float-info { display: none !important; }
           .cx-stats { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .cx-h1-line { font-size: clamp(2.4rem, 8vw, 4rem) !important; }
+          .cx-bottom-bar { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
           .cx-cards { display: none !important; }
         }
       `}</style>
@@ -213,7 +219,7 @@ export default function Hero() {
         position: 'absolute', inset: 0,
         display: 'flex', flexDirection: 'column',
         justifyContent: 'flex-end',
-        padding: 'clamp(24px,5vw,60px) clamp(24px,6vw,80px) clamp(36px,5vw,64px)',
+        padding: 'clamp(20px,4vw,48px) clamp(20px,4vw,56px) clamp(28px,4vw,48px)',
         zIndex: 2,
       }}>
 
@@ -236,7 +242,7 @@ export default function Hero() {
             className="cx-h1-line cx-a2"
             style={{
               display: 'block',
-              fontSize: 'clamp(4.2rem, 9.5vw, 10.5rem)',
+              fontSize: 'clamp(3rem, 6.5vw, 6.5rem)',
               fontWeight: 300,
               color: '#fff',
               letterSpacing: '-.025em',
@@ -248,7 +254,7 @@ export default function Hero() {
             className="cx-h1-line cx-a3"
             style={{
               display: 'block',
-              fontSize: 'clamp(4.2rem, 9.5vw, 10.5rem)',
+              fontSize: 'clamp(3rem, 6.5vw, 6.5rem)',
               fontWeight: 300,
               fontStyle: 'italic',
               letterSpacing: '-.025em',
@@ -277,7 +283,7 @@ export default function Hero() {
           {/* Left — body + buttons */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
             <p className="cx-jost" style={{
-              fontSize: 'clamp(.85rem, 1.1vw, 1rem)',
+              fontSize: 'clamp(.8rem, .9vw, .92rem)',
               fontWeight: 300, color: 'rgba(255,255,255,.55)',
               lineHeight: 1.8, maxWidth: 400, margin: 0,
               letterSpacing: '.01em',
@@ -312,12 +318,12 @@ export default function Hero() {
             ].map((st, i) => (
               <div key={st.l} style={{
                 display: 'flex', flexDirection: 'column', gap: 6,
-                padding: '0 32px',
+                padding: '0 clamp(12px,2vw,32px)',
                 borderLeft: i > 0 ? '1px solid rgba(255,255,255,.12)' : 'none',
                 textAlign: 'right',
               }}>
                 <span className="cx-corm" style={{
-                  fontSize: 'clamp(2rem, 3.2vw, 3.2rem)',
+                  fontSize: 'clamp(1.4rem, 2vw, 2.2rem)',
                   fontWeight: 300, color: '#fff', lineHeight: 1,
                 }}>
                   <Counter to={st.n} suffix={st.s} />
@@ -366,25 +372,25 @@ export default function Hero() {
 
 
       {/* ── INFO — top-right, no cards, just text floating on photo ── */}
-      <div className="cx-cards" style={{
-        position: 'absolute', top: 108, right: 'clamp(20px,4vw,56px)',
+      <div className="cx-cards cx-float-info" style={{
+        position: 'absolute', top: '12vh', right: 'clamp(20px,3vw,48px)',
         zIndex: 4,
-        display: 'flex', flexDirection: 'column', gap: 28,
-        width: 300,
+        display: 'flex', flexDirection: 'column', gap: 'clamp(16px,2vh,28px)',
+        width: 'clamp(200px,18vw,300px)',
       }}>
 
         {/* Location */}
-        <div className="cx-c1 cx-jost" style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 3 }}>
+        <div className="cx-c1 cx-jost" style={{ display: 'flex', alignItems: 'flex-start', gap: 'clamp(8px,1vw,14px)' }}>
+          <svg width="clamp(13px,1.1vw,18px)" height="clamp(13px,1.1vw,18px)" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 3 }}>
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
           <div>
-            <div style={{ fontSize: '1.05rem', color: '#fff', fontWeight: 400, lineHeight: 1.4 }}>Av. Reforma #1089 Esq. Calle C</div>
-            <div style={{ fontSize: '.88rem', color: 'rgba(255,255,255,.55)', fontWeight: 300, marginTop: 4 }}>Mexicali, Baja California</div>
+            <div style={{ fontSize: 'clamp(.72rem,.9vw,.92rem)', color: '#fff', fontWeight: 400, lineHeight: 1.4 }}>Av. Reforma #1089 Esq. Calle C</div>
+            <div style={{ fontSize: 'clamp(.62rem,.78vw,.78rem)', color: 'rgba(255,255,255,.55)', fontWeight: 300, marginTop: 4 }}>Mexicali, Baja California</div>
             <a
               href="https://maps.google.com/?q=Av+Reforma+1089+Mexicali+Mexico"
               target="_blank" rel="noopener noreferrer"
-              style={{ fontSize: '.82rem', color: 'rgba(255,255,255,.5)', textDecoration: 'none', display: 'inline-block', marginTop: 7, borderBottom: '1px solid rgba(255,255,255,.25)', paddingBottom: 2 }}
+              style={{ fontSize: 'clamp(.62rem,.78vw,.78rem)', color: 'rgba(255,255,255,.5)', textDecoration: 'none', display: 'inline-block', marginTop: 6, borderBottom: '1px solid rgba(255,255,255,.25)', paddingBottom: 2 }}
             >Ver en mapa</a>
           </div>
         </div>
@@ -393,14 +399,14 @@ export default function Hero() {
         <div style={{ height: 1, background: 'rgba(255,255,255,.12)' }} />
 
         {/* Hours */}
-        <div className="cx-c2 cx-jost" style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 3 }}>
+        <div className="cx-c2 cx-jost" style={{ display: 'flex', alignItems: 'flex-start', gap: 'clamp(8px,1vw,14px)' }}>
+          <svg width="clamp(13px,1.1vw,18px)" height="clamp(13px,1.1vw,18px)" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 3 }}>
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
           <div>
-            <div style={{ fontSize: '1.05rem', color: '#fff', fontWeight: 400, lineHeight: 1.4 }}>Lun–Vie &amp; Dom · 8am–8pm</div>
-            <div style={{ fontSize: '.88rem', color: 'rgba(255,255,255,.55)', fontWeight: 300, marginTop: 4 }}>Sáb · 8am–2pm</div>
-            <a href="tel:6865510099" style={{ fontSize: '.82rem', color: 'rgba(255,255,255,.5)', textDecoration: 'none', display: 'inline-block', marginTop: 7, borderBottom: '1px solid rgba(255,255,255,.25)', paddingBottom: 2 }}>686 551 0099</a>
+            <div style={{ fontSize: 'clamp(.72rem,.9vw,.92rem)', color: '#fff', fontWeight: 400, lineHeight: 1.4 }}>Lun–Vie &amp; Dom · 8am–8pm</div>
+            <div style={{ fontSize: 'clamp(.62rem,.78vw,.78rem)', color: 'rgba(255,255,255,.55)', fontWeight: 300, marginTop: 4 }}>Sáb · 8am–2pm</div>
+            <a href="tel:6865510099" style={{ fontSize: 'clamp(.62rem,.78vw,.78rem)', color: 'rgba(255,255,255,.5)', textDecoration: 'none', display: 'inline-block', marginTop: 6, borderBottom: '1px solid rgba(255,255,255,.25)', paddingBottom: 2 }}>686 551 0099</a>
           </div>
         </div>
 

@@ -40,12 +40,13 @@ export default function Footer() {
                 }
                 .ft-cta-ghost {
                     background: transparent;
-                    color: rgba(255,255,255,.38);
-                    border: 1px solid rgba(255,255,255,.15);
+                    color: rgba(255,255,255,.88);
+                    border: 1px solid rgba(255,255,255,.28);
                 }
                 .ft-cta-ghost:hover {
-                    color: rgba(255,255,255,.75);
-                    border-color: rgba(255,255,255,.2);
+                    border-color: rgba(255,255,255,.65);
+                    color: #fff;
+                    background: rgba(255,255,255,.06);
                 }
             `}</style>
 
@@ -112,7 +113,7 @@ export default function Footer() {
                             fontSize: '.58rem', fontWeight: 300,
                             letterSpacing: '.22em', textTransform: 'uppercase',
                             color: '#00897B',
-                        }}>Ortopedia & Deportiva</div>
+                        }}>Traumatologia y Ortopedia - Terapia Fisica</div>
                     </div>
                     <p style={{
                         fontFamily: "'Jost', sans-serif",

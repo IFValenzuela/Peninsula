@@ -90,8 +90,34 @@ export default function Header() {
               boxShadow: (scrolled || mobileOpen) ? '0 1px 24px rgba(0,0,0,0.06)' : 'none',
             }}
         >
+            <style>{`
+                .hdr-bar {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                }
+                .hdr-right {
+                    position: absolute;
+                    right: 0; top: 0; bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+                @media (min-width: 1024px) {
+                    .hdr-bar {
+                        display: grid;
+                        grid-template-columns: 1fr auto 1fr;
+                        position: static;
+                    }
+                    .hdr-right {
+                        position: static;
+                        justify-content: flex-end;
+                    }
+                }
+            `}</style>
             <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', height: 72 }}>
+                <div className="hdr-bar" style={{ height: 72 }}>
 
                     {/* ── Logo — far left ── */}
                     <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
@@ -181,7 +207,7 @@ export default function Header() {
                     </nav>
 
                     {/* ── Right — phone + hamburger ── */}
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8 }}>
+                    <div className="hdr-right">
                         {/* Phone — desktop only */}
                         <a href="tel:6865510099" className="hidden lg:flex" style={{
                             fontFamily: "'Jost', sans-serif",

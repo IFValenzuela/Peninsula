@@ -51,14 +51,14 @@ const credentialIcons = {
 
 export default function DoctorProfiles() {
     return (
-        <section className="py-24 bg-white" id="nosotros">
+        <section className="py-12 md:py-24 bg-white" id="nosotros">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-8 md:mb-16">
                     <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">
                         Equipo Médico
                     </span>
-                    <h2 className="text-4xl lg:text-5xl font-bold text-navy tracking-tight">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy tracking-tight">
                         Conoce a Nuestros Especialistas
                     </h2>
                     <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">

@@ -14,6 +14,7 @@ const quickLinks = [
     { name: 'Pie y Tobillo', path: '/especialidades', icon: '🦶' },
 ]
 
+export default function HomePage() {
     return (
         <>
             <div className="relative">
@@ -42,7 +43,7 @@ const quickLinks = [
                     </span>
                     <h2
                         id="triage-heading"
-                        className="text-4xl lg:text-5xl font-bold text-[#164E63] tracking-tight"
+                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#164E63] tracking-tight"
                     >
                         ¿Dónde Te Duele?
                     </h2>

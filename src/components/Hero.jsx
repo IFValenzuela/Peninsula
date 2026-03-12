@@ -329,7 +329,7 @@ export default function Hero() {
                   <Counter to={st.n} suffix={st.s} />
                 </span>
                 <span className="cx-jost" style={{
-                  fontSize: '.58rem', fontWeight: 300,
+                  fontSize: '.65rem', fontWeight: 300,
                   color: 'rgba(255,255,255,.4)',
                   letterSpacing: '.12em', textTransform: 'uppercase',
                   whiteSpace: 'pre-line', lineHeight: 1.5,
@@ -349,7 +349,7 @@ export default function Hero() {
           display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap',
         }}>
           <span style={{
-            fontSize: '.58rem', fontWeight: 300,
+            fontSize: '.65rem', fontWeight: 300,
             color: 'rgba(255,255,255,.3)',
             letterSpacing: '.16em', textTransform: 'uppercase',
           }}>
@@ -357,7 +357,7 @@ export default function Hero() {
           </span>
           {['CMO', 'FIFA Med', 'HSS Fellow', 'Mayo Clinic'].map(a => (
             <span key={a} style={{
-              fontSize: '.62rem', fontWeight: 300,
+              fontSize: '.68rem', fontWeight: 300,
               color: 'rgba(255,255,255,.45)',
               padding: '4px 12px',
               border: '1px solid rgba(255,255,255,.12)',
@@ -423,7 +423,7 @@ export default function Hero() {
         }}
       >
         <span style={{
-          fontSize: '.55rem', letterSpacing: '.2em',
+          fontSize: '.62rem', letterSpacing: '.2em',
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,.28)',
         }}>Scroll</span>

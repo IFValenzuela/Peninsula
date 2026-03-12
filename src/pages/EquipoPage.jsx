@@ -9,7 +9,7 @@ export default function EquipoPage() {
                     <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">
                         Equipo Médico
                     </span>
-                    <h1 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
                         Especialistas de Clase Mundial
                     </h1>
                     <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">

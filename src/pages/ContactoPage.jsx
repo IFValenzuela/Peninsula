@@ -7,7 +7,7 @@ export default function ContactoPage() {
             <section className="pt-28 pb-12 bg-gradient-to-b from-navy to-trust-blue">
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
                     <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">Contacto</span>
-                    <h1 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">Agenda Tu Cita</h1>
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">Agenda Tu Cita</h1>
                     <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
                         Estamos listos para ayudarte. Elige el método de contacto que prefieras.
                     </p>

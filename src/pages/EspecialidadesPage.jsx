@@ -9,7 +9,7 @@ export default function EspecialidadesPage() {
                     <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">
                         Nuestras Especialidades
                     </span>
-                    <h1 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
                         Atención Especializada para Cada Zona
                     </h1>
                     <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
@@ -42,9 +42,9 @@ export default function EspecialidadesPage() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="bg-gradient-to-br from-off-white to-teal-light rounded-2xl p-12 flex items-center justify-center">
+                        <div className="bg-gradient-to-br from-off-white to-teal-light rounded-2xl p-6 sm:p-12 flex items-center justify-center">
                             <div className="text-center">
-                                <div className="text-6xl font-bold text-teal mb-2">+5,000</div>
+                                <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-teal mb-2">+5,000</div>
                                 <div className="text-gray-500 font-medium">Cirugías exitosas realizadas</div>
                             </div>
                         </div>

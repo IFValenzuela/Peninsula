@@ -73,14 +73,14 @@ const bodyParts = [
 
 export default function TriageWidget() {
     return (
-        <section className="py-24 bg-off-white" id="triage">
+        <section className="py-12 md:py-24 bg-off-white" id="triage">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-8 md:mb-16">
                     <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">
                         Especialidades
                     </span>
-                    <h2 className="text-4xl lg:text-5xl font-bold text-navy tracking-tight">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy tracking-tight">
                         Área de Atención
                     </h2>
                     <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
@@ -111,7 +111,7 @@ export default function TriageWidget() {
                                 </p>
 
                                 {/* Arrow indicator */}
-                                <div className="mt-5 inline-flex items-center gap-1 text-teal opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                <div className="mt-5 inline-flex items-center gap-1 text-teal opacity-60 group-hover:opacity-100 transition-all duration-300">
                                     <span className="text-xs font-semibold">Ver especialista</span>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

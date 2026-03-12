@@ -221,18 +221,18 @@ export default function Header() {
 
             {/* Mobile Menu */}
             {mobileOpen && (
-                <div style={{ background: scrolled ? '#fff' : 'transparent', borderTop: '1px solid rgba(0,0,0,.07)' }}>
+                <div style={{ background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderTop: '1px solid rgba(0,0,0,.07)' }}>
                     <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {navItems.map((item) => (
                             <a key={item.label} href={item.href || '#'}
-                                style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:300, letterSpacing:'.12em', textTransform:'uppercase', color:'rgba(44,40,36,.7)', padding:'12px 8px', textDecoration:'none', borderBottom:'1px solid rgba(0,0,0,.05)' }}
+                                style={{ fontFamily:"'Jost',sans-serif", fontSize:'.9rem', fontWeight:300, letterSpacing:'.08em', textTransform:'uppercase', color:'rgba(44,40,36,.75)', padding:'14px 8px', textDecoration:'none', borderBottom:'1px solid rgba(0,0,0,.06)' }}
                                 onClick={() => setMobileOpen(false)}
                             >{item.label}</a>
                         ))}
                         <a href="tel:6865510099"
-                            style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:300, letterSpacing:'.16em', textTransform:'uppercase', color:'#1C1917', padding:'14px 8px', textDecoration:'none', display:'flex', alignItems:'center', gap:8, marginTop:8, border:'1px solid rgba(28,25,23,.25)' }}
+                            style={{ fontFamily:"'Jost',sans-serif", fontSize:'.9rem', fontWeight:300, letterSpacing:'.1em', textTransform:'uppercase', color:'#1C1917', padding:'14px 8px', textDecoration:'none', display:'flex', alignItems:'center', gap:8, marginTop:8, border:'1px solid rgba(28,25,23,.25)' }}
                         >
-                            <span style={{ width:6, height:6, borderRadius:'50%', background:'#4ADE80', display:'inline-block' }} />
+                            <span style={{ width:6, height:6, borderRadius:'50%', background:'#5A92BE', display:'inline-block' }} />
                             Contactar Clínica
                         </a>
                     </div>

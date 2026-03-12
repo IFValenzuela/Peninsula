@@ -48,6 +48,29 @@ export default function Footer() {
                     color: #fff;
                     background: rgba(255,255,255,.06);
                 }
+                .ft-main-grid {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+                @media (min-width: 640px) {
+                    .ft-main-grid {
+                        grid-template-columns: 1fr 1fr;
+                        gap: 40px;
+                    }
+                    .ft-main-grid > .ft-brand {
+                        grid-column: 1 / -1;
+                    }
+                }
+                @media (min-width: 1024px) {
+                    .ft-main-grid {
+                        grid-template-columns: 2fr 1fr 1fr 1fr;
+                        gap: 48px;
+                    }
+                    .ft-main-grid > .ft-brand {
+                        grid-column: auto;
+                    }
+                }
             `}</style>
 
             {/* CTA strip */}
@@ -92,15 +115,10 @@ export default function Footer() {
             </div>
 
             {/* Main footer */}
-            <div style={{
-                maxWidth: 1400, margin: '0 auto',
-                padding: 'clamp(48px,6vw,72px) clamp(20px,4vw,56px)',
-                display: 'grid',
-                gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                gap: 48,
-            }}>
+            <div style={{ maxWidth: 1400, margin: '0 auto', padding: 'clamp(48px,6vw,72px) clamp(20px,4vw,56px)' }}
+                className="ft-main-grid">
                 {/* Brand */}
-                <div>
+                <div className="ft-brand">
                     <div style={{ marginBottom: 20 }}>
                         <div style={{
                             fontFamily: "'Cormorant Garamond', serif",
@@ -110,8 +128,8 @@ export default function Footer() {
                         }}>Península OC</div>
                         <div style={{
                             fontFamily: "'Jost', sans-serif",
-                            fontSize: '.58rem', fontWeight: 300,
-                            letterSpacing: '.22em', textTransform: 'uppercase',
+                            fontSize: '.75rem', fontWeight: 300,
+                            letterSpacing: '.18em', textTransform: 'uppercase',
                             color: '#5A92BE',
                         }}>Traumatologia y Ortopedia - Terapia Fisica</div>
                     </div>
@@ -145,8 +163,8 @@ export default function Footer() {
                     <div key={title}>
                         <h4 style={{
                             fontFamily: "'Jost', sans-serif",
-                            fontSize: '.62rem', fontWeight: 400,
-                            letterSpacing: '.18em', textTransform: 'uppercase',
+                            fontSize: '.75rem', fontWeight: 400,
+                            letterSpacing: '.14em', textTransform: 'uppercase',
                             color: 'rgba(255,255,255,.4)',
                             margin: '0 0 20px',
                         }}>{title}</h4>
@@ -171,12 +189,12 @@ export default function Footer() {
             }}>
                 <p style={{
                     fontFamily: "'Jost', sans-serif",
-                    fontSize: '.62rem', fontWeight: 300,
+                    fontSize: '.72rem', fontWeight: 300,
                     color: 'rgba(255,255,255,.25)', margin: 0,
                 }}>© 2026 Península OC. Todos los derechos reservados.</p>
                 <div style={{ display: 'flex', gap: 24 }}>
                     {['Aviso de Privacidad', 'Términos y Condiciones'].map(l => (
-                        <a key={l} href="#" className="ft-link" style={{ fontSize: '.62rem' }}>{l}</a>
+                        <a key={l} href="#" className="ft-link" style={{ fontSize: '.72rem' }}>{l}</a>
                     ))}
                 </div>
             </div>

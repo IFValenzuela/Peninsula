@@ -46,7 +46,7 @@ export default function Testimonials() {
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Jost:wght@200;300;400&display=swap');
                 .tm-nav-btn {
-                    width: 38px; height: 38px;
+                    width: 44px; height: 44px;
                     border: 1px solid rgba(0,0,0,.15);
                     background: transparent;
                     display: flex; align-items: center; justify-content: center;
@@ -54,6 +54,21 @@ export default function Testimonials() {
                     transition: border-color .2s, background .2s;
                 }
                 .tm-nav-btn:hover { border-color: rgba(0,0,0,.4); background: rgba(0,0,0,.03); }
+                .tm-grid {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    border: 1px solid rgba(0,0,0,.09);
+                    box-shadow: 0 8px 48px rgba(0,0,0,.08), 0 2px 12px rgba(0,0,0,.04);
+                }
+                @media (min-width: 768px) {
+                    .tm-grid {
+                        grid-template-columns: 1fr 2fr;
+                    }
+                    .tm-left-panel {
+                        border-right: 1px solid rgba(0,0,0,.09);
+                        border-bottom: none !important;
+                    }
+                }
             `}</style>
 
             <div style={{ maxWidth: 1400, margin: '0 auto' }}>
@@ -80,16 +95,16 @@ export default function Testimonials() {
 
                 {/* Testimonial */}
                 <div
-                    style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 0, border: '1px solid rgba(0,0,0,.09)', boxShadow: '0 8px 48px rgba(0,0,0,.08), 0 2px 12px rgba(0,0,0,.04)' }}
+                    className="tm-grid"
                     onMouseEnter={() => setAuto(false)}
                     onMouseLeave={() => setAuto(true)}
                 >
                     {/* Left — patient info */}
-                    <div style={{
-                        padding: 'clamp(32px,4vw,52px)',
+                    <div className="tm-left-panel" style={{
+                        padding: 'clamp(20px,4vw,52px)',
                         background: '#FAFAF9',
-                        borderRight: '1px solid rgba(0,0,0,.09)',
-                        display: 'flex', flexDirection: 'column', gap: 32,
+                        borderBottom: '1px solid rgba(0,0,0,.09)',
+                        display: 'flex', flexDirection: 'column', gap: 24,
                     }}>
                         {/* Name */}
                         <div>
@@ -118,7 +133,7 @@ export default function Testimonials() {
                                 }}>
                                     <div style={{
                                         fontFamily: "'Jost', sans-serif",
-                                        fontSize: '.58rem', fontWeight: 300,
+                                        fontSize: '.65rem', fontWeight: 300,
                                         letterSpacing: '.14em', textTransform: 'uppercase',
                                         color: 'rgba(0,0,0,.35)', marginBottom: 5,
                                     }}>{row.label}</div>
@@ -147,13 +162,13 @@ export default function Testimonials() {
 
                     {/* Right — quote */}
                     <div style={{
-                        padding: 'clamp(32px,5vw,64px)',
+                        padding: 'clamp(24px,5vw,64px)',
                         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-                        gap: 40,
+                        gap: 32,
                     }}>
                         <blockquote style={{
                             fontFamily: "'Cormorant Garamond', serif",
-                            fontSize: 'clamp(1.3rem, 2vw, 1.75rem)',
+                            fontSize: 'clamp(1.1rem, 2vw, 1.75rem)',
                             fontWeight: 300, fontStyle: 'italic',
                             color: '#1C1917', lineHeight: 1.6,
                             margin: 0,

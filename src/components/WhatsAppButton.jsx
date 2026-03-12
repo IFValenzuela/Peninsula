@@ -6,7 +6,7 @@ export default function WhatsAppButton() {
     const message = encodeURIComponent('Hola, me gustaría agendar una cita en Península OC.');
 
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+        <div className="hidden lg:flex fixed bottom-6 right-6 z-50 flex-col items-end gap-3">
             {/* Tooltip */}
             {showTooltip && (
                 <div className="animate-slide-down bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 max-w-[280px]">

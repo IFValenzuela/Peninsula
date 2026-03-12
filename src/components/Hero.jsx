@@ -317,7 +317,6 @@ export default function Hero() {
             {[
               { n: 15, s: '+', l: 'Años de\nexperiencia' },
               { n: 5000, s: '+', l: 'Cirugías\nexitosas' },
-              { n: 98, s: '%', l: 'Índice de\nsatisfacción' },
             ].map((st, i) => (
               <div key={st.l} style={{
                 display: 'flex', flexDirection: 'column', gap: 6,

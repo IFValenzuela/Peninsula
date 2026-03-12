@@ -94,24 +94,24 @@ export default function TriageWidget() {
                         <a
                             key={i}
                             href="#"
-                            className="group relative bg-white rounded-2xl p-8 text-center border border-gray-200/60 hover:border-teal/40 shadow-sm hover:shadow-lg hover:shadow-teal/10 hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+                            className="group relative bg-white rounded-2xl p-8 text-center border border-gray-200/60 hover:border-teal/40 shadow-sm hover:shadow-lg hover:shadow-teal/10 hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col"
                         >
                             {/* Background gradient on hover */}
                             <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${part.color} ${part.hoverColor} transition-all duration-300 opacity-0 group-hover:opacity-100`} />
 
-                            <div className="relative z-10">
+                            <div className="relative z-10 flex flex-col flex-1">
                                 <div className="text-gray-400 group-hover:text-teal transition-colors duration-300 flex justify-center mb-5">
                                     {part.icon}
                                 </div>
                                 <h3 className="font-bold text-navy text-lg mb-2 group-hover:text-teal transition-colors">
                                     {part.name}
                                 </h3>
-                                <p className="text-gray-400 text-xs leading-relaxed">
+                                <p className="text-gray-400 text-xs leading-relaxed flex-1">
                                     {part.subtitle}
                                 </p>
 
                                 {/* Arrow indicator */}
-                                <div className="mt-5 inline-flex items-center gap-1 text-teal opacity-60 group-hover:opacity-100 transition-all duration-300">
+                                <div className="mt-5 inline-flex items-center gap-1 text-teal opacity-60 group-hover:opacity-100 transition-all duration-300 self-center">
                                     <span className="text-xs font-semibold">Ver especialista</span>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

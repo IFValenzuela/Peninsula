@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function WhatsAppButton() {
     const [showTooltip, setShowTooltip] = useState(false);
-    const phone = '526641234567';
+    const phone = '526865510099';
     const message = encodeURIComponent('Hola, me gustaría agendar una cita en Península OC.');
 
     return (
@@ -17,8 +17,8 @@ export default function WhatsAppButton() {
                             </svg>
                         </div>
                         <div>
-                            <p className="font-semibold text-navy text-sm">¿Atención inmediata?</p>
-                            <p className="text-gray-500 text-xs mt-1 leading-relaxed">Habla con un especialista médico ahora por WhatsApp.</p>
+                            <p className="font-semibold text-navy text-sm">Agenda tu cita por WhatsApp</p>
+                            <p className="text-gray-500 text-xs mt-1 leading-relaxed">Escríbenos y un especialista te ayudará a agendar tu consulta.</p>
                         </div>
                     </div>
                     <a
@@ -27,7 +27,7 @@ export default function WhatsAppButton() {
                         rel="noopener noreferrer"
                         className="mt-4 block w-full text-center bg-green-500 hover:bg-green-600 text-white font-semibold text-sm py-2.5 rounded-xl transition-colors"
                     >
-                        Iniciar Chat
+                        Agendar cita por WhatsApp
                     </a>
                 </div>
             )}

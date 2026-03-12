@@ -70,8 +70,8 @@ export default function ContactoPage() {
                                         <p className="text-gray-500 text-sm">Habla con un especialista ahora</p>
                                     </div>
                                 </div>
-                                <a href="https://wa.me/526641234567" target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
-                                    Iniciar Chat por WhatsApp
+                                <a href="https://wa.me/526865510099?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita%20en%20Pen%C3%ADnsula%20OC." target="_blank" rel="noopener noreferrer" className="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
+                                    Agendar cita por WhatsApp
                                 </a>
                             </div>
 

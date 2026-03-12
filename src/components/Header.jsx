@@ -84,19 +84,19 @@ export default function Header() {
         <header
             className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
             style={{
-              background: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent',
-              backdropFilter: scrolled ? 'blur(12px)' : 'none',
-              borderBottom: scrolled ? '1px solid rgba(0,0,0,0.07)' : '1px solid transparent',
-              boxShadow: scrolled ? '0 1px 24px rgba(0,0,0,0.06)' : 'none',
+              background: (scrolled || mobileOpen) ? 'rgba(255,255,255,0.97)' : 'transparent',
+              backdropFilter: (scrolled || mobileOpen) ? 'blur(12px)' : 'none',
+              borderBottom: (scrolled || mobileOpen) ? '1px solid rgba(0,0,0,0.07)' : '1px solid transparent',
+              boxShadow: (scrolled || mobileOpen) ? '0 1px 24px rgba(0,0,0,0.06)' : 'none',
             }}
         >
             <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', height: 72 }}>
 
                     {/* ── Logo — far left ── */}
                     <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
                         <img
-                            src={scrolled ? '/LogoWhite.png' : '/Logo.png'}
+                            src={(scrolled || mobileOpen) ? '/LogoWhite.png' : '/Logo.png'}
                             alt="Península OC"
                             style={{
                                 height: 36,
@@ -108,11 +108,8 @@ export default function Header() {
                         />
                     </a>
 
-                    {/* ── Right group — nav + phone + hamburger ── */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-
-                    {/* Nav — desktop only */}
-                    <nav className="hidden lg:flex items-center" style={{ gap: 2 }}>
+                    {/* ── Nav — centered ── */}
+                    <nav className="hidden lg:flex items-center" style={{ gap: 6 }}>
                         {navItems.map((item) => (
                             <div
                                 key={item.label}
@@ -183,9 +180,8 @@ export default function Header() {
                         ))}
                     </nav>
 
-                        {/* Thin divider — desktop only */}
-                        <div className="hidden lg:block" style={{ width: 1, height: 18, background: scrolled ? 'rgba(0,0,0,.12)' : 'rgba(255,255,255,.2)', margin: '0 12px' }} />
-
+                    {/* ── Right — phone + hamburger ── */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8 }}>
                         {/* Phone — desktop only */}
                         <a href="tel:6865510099" className="hidden lg:flex" style={{
                             fontFamily: "'Jost', sans-serif",
@@ -210,7 +206,7 @@ export default function Header() {
                             className="lg:hidden"
                             onClick={() => setMobileOpen(!mobileOpen)}
                             aria-label="Abrir menú"
-                            style={{ color: scrolled ? '#1C1917' : '#fff', background: 'none', border: 'none', cursor: 'pointer', padding: '8px 4px' }}
+                            style={{ color: (scrolled || mobileOpen) ? '#1C1917' : '#fff', background: 'none', border: 'none', cursor: 'pointer', padding: '8px 4px' }}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                                 {mobileOpen
@@ -219,8 +215,7 @@ export default function Header() {
                                 }
                             </svg>
                         </button>
-
-                    </div>{/* end right group */}
+                    </div>
 
                 </div>
             </div>
@@ -235,12 +230,6 @@ export default function Header() {
                                 onClick={() => setMobileOpen(false)}
                             >{item.label}</a>
                         ))}
-                        <a href="tel:6865510099"
-                            style={{ fontFamily:"'Jost',sans-serif", fontSize:'.9rem', fontWeight:300, letterSpacing:'.1em', textTransform:'uppercase', color:'#1C1917', padding:'14px 8px', textDecoration:'none', display:'flex', alignItems:'center', gap:8, marginTop:8, border:'1px solid rgba(28,25,23,.25)' }}
-                        >
-                            <span style={{ width:6, height:6, borderRadius:'50%', background:'#5A92BE', display:'inline-block' }} />
-                            Contactar Clínica
-                        </a>
                     </div>
                 </div>
             )}

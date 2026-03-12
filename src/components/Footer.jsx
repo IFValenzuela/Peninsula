@@ -77,7 +77,7 @@ export default function Footer() {
                     </div>
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                         <a href="tel:6865510099" className="ft-cta ft-cta-primary">
-                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ADE80', display: 'inline-block', flexShrink: 0 }} />
+                            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#5A92BE', display: 'inline-block', flexShrink: 0 }} />
                             686 551 0099
                         </a>
                         <a href="https://wa.me/526865510099" target="_blank" rel="noopener noreferrer" className="ft-cta ft-cta-ghost">
@@ -112,7 +112,7 @@ export default function Footer() {
                             fontFamily: "'Jost', sans-serif",
                             fontSize: '.58rem', fontWeight: 300,
                             letterSpacing: '.22em', textTransform: 'uppercase',
-                            color: '#00897B',
+                            color: '#5A92BE',
                         }}>Traumatologia y Ortopedia - Terapia Fisica</div>
                     </div>
                     <p style={{

@@ -61,12 +61,12 @@ export default function Testimonials() {
                 {/* Header */}
                 <div style={{ marginBottom: 56 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                        <div style={{ width: 24, height: 1, background: '#00BFA6' }} />
+                        <div style={{ width: 24, height: 1, background: '#5A92BE' }} />
                         <span style={{
                             fontFamily: "'Jost', sans-serif",
                             fontSize: '.62rem', fontWeight: 300,
                             letterSpacing: '.22em', textTransform: 'uppercase',
-                            color: '#00BFA6',
+                            color: '#5A92BE',
                         }}>Testimonios</span>
                     </div>
                     <h2 style={{
@@ -125,7 +125,7 @@ export default function Testimonials() {
                                     <div style={{
                                         fontFamily: "'Jost', sans-serif",
                                         fontSize: '.8rem', fontWeight: 400,
-                                        color: row.accent ? '#00897B' : '#1C1917',
+                                        color: row.accent ? '#4A7EA8' : '#1C1917',
                                     }}>{row.value}</div>
                                 </div>
                             ))}
@@ -137,7 +137,7 @@ export default function Testimonials() {
                                 <button key={i} onClick={() => setCurrent(i)} style={{
                                     width: i === current ? 24 : 6,
                                     height: 6,
-                                    background: i === current ? '#00897B' : 'rgba(0,0,0,.15)',
+                                    background: i === current ? '#4A7EA8' : 'rgba(0,0,0,.15)',
                                     border: 'none', cursor: 'pointer', padding: 0,
                                     transition: 'width .3s, background .3s',
                                 }} />

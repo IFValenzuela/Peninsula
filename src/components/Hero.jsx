@@ -32,7 +32,7 @@ export default function Hero() {
         height: '100svh',
         minHeight: 600,
         overflow: 'hidden',
-        background: '#0E1A14',
+        background: '#0E141A',
       }}
     >
       <style>{`
@@ -66,8 +66,8 @@ export default function Hero() {
           50%      { transform: translateY(7px); }
         }
         @keyframes cx-pulse-dot {
-          0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(74,222,128,.5); }
-          60%      { opacity:.8; box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+          0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(90,146,190,.5); }
+          60%      { opacity:.8; box-shadow: 0 0 0 6px rgba(90,146,190,0); }
         }
         @keyframes cx-card-in {
           from { opacity:0; transform:translateY(12px); }
@@ -120,7 +120,7 @@ export default function Hero() {
         }
         .cx-cta-dot {
           width: 7px; height: 7px; border-radius: 50%;
-          background: #4ADE80; flex-shrink: 0;
+          background: #5A92BE; flex-shrink: 0;
           animation: cx-pulse-dot 2.2s ease infinite;
         }
 
@@ -145,7 +145,7 @@ export default function Hero() {
 
         /* Glass card */
         .cx-glass {
-          background: rgba(14,26,20,.72);
+          background: rgba(14,20,26,.72);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(255,255,255,.1);
@@ -259,7 +259,7 @@ export default function Hero() {
               fontStyle: 'italic',
               letterSpacing: '-.025em',
               /* Warm off-white — feels more expensive than pure white */
-              color: '#C8DBCF',
+              color: '#C8D8E8',
             }}
           >
             más importa.
@@ -269,7 +269,7 @@ export default function Hero() {
         {/* ── Thin teal rule ── */}
         <div className="cx-ln" style={{
           width: 48, height: 1.5,
-          background: '#4ADE80',
+          background: '#5A92BE',
           margin: '28px 0 24px',
         }} />
 

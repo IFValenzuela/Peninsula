@@ -160,6 +160,9 @@ export default function Hero() {
           .cx-h1-line { font-size: clamp(2.4rem, 8vw, 4rem) !important; }
           .cx-bottom-bar { flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
           .cx-cards { display: none !important; }
+          .cx-a5 { display: none !important; }
+          .cx-eyebrow { margin-bottom: 16px !important; }
+          .cx-photo { filter: brightness(.55) saturate(.75) contrast(1.04) !important; }
         }
       `}</style>
 
@@ -224,7 +227,7 @@ export default function Hero() {
       }}>
 
         {/* ── Eyebrow ── */}
-        <div className="cx-jost cx-a1" style={{
+        <div className="cx-jost cx-a1 cx-eyebrow" style={{
           display: 'flex', alignItems: 'center', gap: 14, marginBottom: 28,
         }}>
           <span style={{

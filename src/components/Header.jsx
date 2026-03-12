@@ -91,7 +91,7 @@ export default function Header() {
             }}
         >
             <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', height: 72 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
 
                     {/* ── Logo — far left ── */}
                     <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
@@ -99,16 +99,20 @@ export default function Header() {
                             src={scrolled ? '/LogoWhite.png' : '/Logo.png'}
                             alt="Península OC"
                             style={{
-                                height: 40,
+                                height: 36,
                                 width: 'auto',
+                                maxWidth: 'clamp(120px,30vw,200px)',
                                 objectFit: 'contain',
                                 transition: 'opacity .3s',
                             }}
                         />
                     </a>
 
-                    {/* ── Nav — centered ── */}
-                    <nav className="hidden lg:flex items-center" style={{ gap: 6 }}>
+                    {/* ── Right group — nav + phone + hamburger ── */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+
+                    {/* Nav — desktop only */}
+                    <nav className="hidden lg:flex items-center" style={{ gap: 2 }}>
                         {navItems.map((item) => (
                             <div
                                 key={item.label}
@@ -179,8 +183,9 @@ export default function Header() {
                         ))}
                     </nav>
 
-                    {/* ── Right — phone + hamburger ── */}
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8 }}>
+                        {/* Thin divider — desktop only */}
+                        <div className="hidden lg:block" style={{ width: 1, height: 18, background: scrolled ? 'rgba(0,0,0,.12)' : 'rgba(255,255,255,.2)', margin: '0 12px' }} />
+
                         {/* Phone — desktop only */}
                         <a href="tel:6865510099" className="hidden lg:flex" style={{
                             fontFamily: "'Jost', sans-serif",
@@ -202,19 +207,20 @@ export default function Header() {
 
                         {/* Hamburger — mobile only */}
                         <button
-                            className="lg:hidden p-2"
+                            className="lg:hidden"
                             onClick={() => setMobileOpen(!mobileOpen)}
                             aria-label="Abrir menú"
-                            style={{ color: scrolled ? '#1C1917' : '#fff', background: 'none', border: 'none', cursor: 'pointer' }}
+                            style={{ color: scrolled ? '#1C1917' : '#fff', background: 'none', border: 'none', cursor: 'pointer', padding: '8px 4px' }}
                         >
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                                 {mobileOpen
                                     ? <><path d="M6 18L18 6"/><path d="M6 6l12 12"/></>
                                     : <><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></>
                                 }
                             </svg>
                         </button>
-                    </div>
+
+                    </div>{/* end right group */}
 
                 </div>
             </div>

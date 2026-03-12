@@ -208,6 +208,23 @@ export default function Header() {
 
                     {/* ── Right — phone + hamburger ── */}
                     <div className="hdr-right">
+                        {/* Mail — desktop only */}
+                        <a href="mailto:recepcion.peninsulaoc@gmail.com" className="hidden lg:flex" style={{
+                            color: scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)',
+                            textDecoration: 'none',
+                            transition: 'color .2s',
+                            alignItems: 'center',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.color = scrolled ? '#1C1917' : '#fff'}
+                        onMouseLeave={e => e.currentTarget.style.color = scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)'}
+                        aria-label="Enviar correo"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M2 7l10 7 10-7"/>
+                            </svg>
+                        </a>
+
                         {/* Phone — desktop only */}
                         <a href="tel:6865510099" className="hidden lg:flex" style={{
                             fontFamily: "'Jost', sans-serif",

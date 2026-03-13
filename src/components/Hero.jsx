@@ -92,9 +92,12 @@ export default function Hero() {
 
         .cx-bob { animation: cx-bob 2.8s ease-in-out infinite; }
         .cx-live { animation: cx-pulse-dot 2.2s ease infinite; }
-        .cx-float-info { display: block; }
+        .cx-float-info { display: block; transition: opacity 0.25s; }
         @media (max-width: 900px) { .cx-float-info { display: none; } }
         @media (min-width: 1600px) { .cx-float-info { right: 80px !important; } }
+        .cx-hero-content { transition: opacity 0.25s; }
+        body.mega-open .cx-float-info,
+        body.mega-open .cx-hero-content { opacity: 0; pointer-events: none; }
 
         /* Primary CTA */
         .cx-cta {
@@ -218,7 +221,7 @@ export default function Hero() {
 
 
       {/* ── CONTENT ──────────────────────────────────────────────────── */}
-      <div style={{
+      <div className="cx-hero-content" style={{
         position: 'absolute', inset: 0,
         display: 'flex', flexDirection: 'column',
         justifyContent: 'flex-end',
@@ -375,7 +378,7 @@ export default function Hero() {
 
       {/* ── INFO — top-right, no cards, just text floating on photo ── */}
       <div className="cx-cards cx-float-info" style={{
-        position: 'absolute', top: '12vh', right: 'clamp(20px,3vw,48px)',
+        position: 'absolute', top: 'max(88px, 12vh)', right: 'clamp(20px,3vw,48px)',
         zIndex: 4,
         display: 'flex', flexDirection: 'column', gap: 'clamp(16px,2vh,28px)',
         width: 'clamp(200px,18vw,300px)',

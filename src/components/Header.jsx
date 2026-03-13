@@ -80,7 +80,12 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        document.body.classList.toggle('mega-open', megaOpen);
+    }, [megaOpen]);
+
     return (
+        <>
         <header
             className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
             style={{
@@ -302,5 +307,6 @@ export default function Header() {
                 </div>
             )}
         </header>
+        </>
     );
 }

@@ -14,7 +14,6 @@ const quickLinks = [
     { name: 'Pie y Tobillo', path: '/especialidades', icon: '🦶' },
 ]
 
-export default function HomePage() {
     return (
         <>
             <div className="relative">
@@ -22,7 +21,7 @@ export default function HomePage() {
                 {/* Floating CTA button for quick appointment */}
                 <a
                     href="#contacto"
-                    className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-[#5A92BE] to-[#4A7EA8] text-white font-bold text-lg px-6 py-3 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 focus-visible:outline-[#5A92BE] focus-visible:outline focus-visible:outline-4 animate-float"
+                    className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-[#0891B2] to-[#059669] text-white font-bold text-lg px-6 py-3 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4 animate-float"
                     aria-label="Agendar cita rápida"
                     tabIndex={0}
                 >
@@ -34,16 +33,16 @@ export default function HomePage() {
 
             {/* Quick Triage Preview */}
             <section
-                className="py-20 bg-[#EAF2F9] font-[Figtree,Noto Sans,sans-serif] focus:outline-none animate-fade-in-up"
+                className="py-20 bg-[#ECFEFF] font-[Figtree,Noto Sans,sans-serif] focus:outline-none animate-fade-in-up"
                 aria-labelledby="triage-heading"
             >
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-                    <span className="inline-block text-[#5A92BE] font-semibold text-sm tracking-wider uppercase mb-3">
+                    <span className="inline-block text-[#0891B2] font-semibold text-sm tracking-wider uppercase mb-3">
                         Diagnóstico Rápido
                     </span>
                     <h2
                         id="triage-heading"
-                        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#164E63] tracking-tight"
+                        className="text-4xl lg:text-5xl font-bold text-[#164E63] tracking-tight"
                     >
                         ¿Dónde Te Duele?
                     </h2>
@@ -56,15 +55,15 @@ export default function HomePage() {
                             <Link
                                 key={item.name}
                                 to={item.path}
-                                className={`group flex items-center gap-3 bg-white border border-[#D1D5DB] hover:border-[#5A92BE] rounded-2xl px-6 py-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-[#5A92BE] focus-visible:outline focus-visible:outline-4 cursor-pointer animate-fade-in-up animation-delay-${200 + idx * 100}`}
+                                className={`group flex items-center gap-3 bg-white border border-[#D1D5DB] hover:border-[#22D3EE] rounded-2xl px-6 py-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4 cursor-pointer animate-fade-in-up animation-delay-${200 + idx * 100}`}
                                 aria-label={`Ir a especialidad: ${item.name}`}
                                 tabIndex={0}
-                                onMouseEnter={e => e.currentTarget.classList.add('ring-4', 'ring-[#5A92BE]')}
-                                onMouseLeave={e => e.currentTarget.classList.remove('ring-4', 'ring-[#5A92BE]')}
+                                onMouseEnter={e => e.currentTarget.classList.add('ring-4', 'ring-[#0891B2]')}
+                                onMouseLeave={e => e.currentTarget.classList.remove('ring-4', 'ring-[#0891B2]')}
                             >
                                 <span className="text-2xl" aria-hidden="true">{item.icon}</span>
-                                <span className="font-semibold text-[#164E63] group-hover:text-[#5A92BE] transition-colors">{item.name}</span>
-                                <svg className="w-4 h-4 text-[#D1D5DB] group-hover:text-[#5A92BE] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <span className="font-semibold text-[#164E63] group-hover:text-[#0891B2] transition-colors">{item.name}</span>
+                                <svg className="w-4 h-4 text-[#D1D5DB] group-hover:text-[#0891B2] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                 </svg>
                             </Link>
@@ -73,7 +72,7 @@ export default function HomePage() {
 
                     <Link
                         to="/especialidades"
-                        className="mt-8 inline-flex items-center gap-2 text-[#5A92BE] hover:text-[#4A7EA8] font-semibold transition-colors focus-visible:outline-[#5A92BE] focus-visible:outline focus-visible:outline-4"
+                        className="mt-8 inline-flex items-center gap-2 text-[#0891B2] hover:text-[#059669] font-semibold transition-colors focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4"
                         aria-label="Ver todas las especialidades"
                         tabIndex={0}
                     >
@@ -91,7 +90,7 @@ export default function HomePage() {
                     <div className="grid md:grid-cols-3 gap-8">
                         <Link
                             to="/equipo"
-                            className="group bg-gradient-to-br from-[#164E63] to-[#5A92BE] rounded-2xl p-8 text-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus-visible:outline-[#5A92BE] focus-visible:outline focus-visible:outline-4"
+                            className="group bg-gradient-to-br from-[#164E63] to-[#0891B2] rounded-2xl p-8 text-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4"
                             aria-label="Ver equipo"
                             tabIndex={0}
                         >
@@ -102,14 +101,14 @@ export default function HomePage() {
                             </div>
                             <h3 className="text-xl font-bold mb-2">Nuestro Equipo</h3>
                             <p className="text-white/60 text-sm">Conoce a los especialistas que lideran tu recuperación.</p>
-                            <div className="mt-4 flex items-center gap-1 text-[#5A92BE] text-sm font-semibold group-hover:gap-2 transition-all">
+                            <div className="mt-4 flex items-center gap-1 text-[#22D3EE] text-sm font-semibold group-hover:gap-2 transition-all">
                                 Ver equipo <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                             </div>
                         </Link>
 
                         <Link
                             to="/testimonios"
-                            className="group bg-gradient-to-br from-[#5A92BE] to-[#4A7EA8] rounded-2xl p-8 text-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus-visible:outline-[#5A92BE] focus-visible:outline focus-visible:outline-4"
+                            className="group bg-gradient-to-br from-[#22D3EE] to-[#0891B2] rounded-2xl p-8 text-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4"
                             aria-label="Leer testimonios"
                             tabIndex={0}
                         >
@@ -127,7 +126,7 @@ export default function HomePage() {
 
                         <Link
                             to="/contacto"
-                            className="group bg-gradient-to-br from-[#5A92BE] to-[#4A7EA8] rounded-2xl p-8 text-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus-visible:outline-[#5A92BE] focus-visible:outline focus-visible:outline-4"
+                            className="group bg-gradient-to-br from-[#059669] to-[#0891B2] rounded-2xl p-8 text-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4"
                             aria-label="Contactar"
                             tabIndex={0}
                         >
@@ -147,4 +146,4 @@ export default function HomePage() {
             </section>
         </>
     )
-}
+

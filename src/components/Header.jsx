@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 const navItems = [
-    {
-        label: 'Especialidades',
-        hasMegaMenu: true,
-    },
+    { label: 'Especialidades', hasMegaMenu: true },
     { label: 'Medicina Deportiva', href: '#medicina-deportiva' },
     { label: 'Nosotros', href: '#nosotros' },
     { label: 'Testimonios', href: '#testimonios' },
@@ -69,10 +66,25 @@ const megaMenuItems = [
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [megaOpen, setMegaOpen] = useState(false);
+    const [megaVisible, setMegaVisible] = useState(false); // controls CSS opacity separately
     const megaTimer = useRef(null);
-    const openMega = () => { clearTimeout(megaTimer.current); setMegaOpen(true); };
-    const closeMega = () => { megaTimer.current = setTimeout(() => setMegaOpen(false), 180); };
+    const fadeTimer = useRef(null);
     const [mobileOpen, setMobileOpen] = useState(false);
+
+    const openMega = () => {
+        clearTimeout(megaTimer.current);
+        clearTimeout(fadeTimer.current);
+        setMegaOpen(true);
+        // Small tick so the element mounts before opacity transitions in
+        fadeTimer.current = setTimeout(() => setMegaVisible(true), 10);
+    };
+
+    const closeMega = () => {
+        clearTimeout(fadeTimer.current);
+        setMegaVisible(false);
+        // Wait for fade-out to finish before unmounting
+        megaTimer.current = setTimeout(() => setMegaOpen(false), 320);
+    };
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -80,19 +92,20 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Toggle body class for hero fade
     useEffect(() => {
-        document.body.classList.toggle('mega-open', megaOpen);
-    }, [megaOpen]);
+        document.body.classList.toggle('mega-open', megaVisible);
+    }, [megaVisible]);
 
     return (
         <>
         <header
             className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
             style={{
-              background: (scrolled || mobileOpen) ? 'rgba(255,255,255,0.97)' : 'transparent',
-              backdropFilter: (scrolled || mobileOpen) ? 'blur(12px)' : 'none',
-              borderBottom: (scrolled || mobileOpen) ? '1px solid rgba(0,0,0,0.07)' : '1px solid transparent',
-              boxShadow: (scrolled || mobileOpen) ? '0 1px 24px rgba(0,0,0,0.06)' : 'none',
+                background: (scrolled || mobileOpen) ? 'rgba(255,255,255,0.97)' : 'transparent',
+                backdropFilter: (scrolled || mobileOpen) ? 'blur(12px)' : 'none',
+                borderBottom: (scrolled || mobileOpen) ? '1px solid rgba(0,0,0,0.07)' : '1px solid transparent',
+                boxShadow: (scrolled || mobileOpen) ? '0 1px 24px rgba(0,0,0,0.06)' : 'none',
             }}
         >
             <style>{`
@@ -120,11 +133,23 @@ export default function Header() {
                         justify-content: flex-end;
                     }
                 }
+
+                /* Hero content fades smoothly when mega opens/closes */
+                .cx-float,
+                .cx-content {
+                    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                body.mega-open .cx-float,
+                body.mega-open .cx-content {
+                    opacity: 0;
+                    pointer-events: none;
+                }
             `}</style>
+
             <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
                 <div className="hdr-bar" style={{ height: 72 }}>
 
-                    {/* ── Logo — far left ── */}
+                    {/* Logo */}
                     <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
                         <img
                             src={(scrolled || mobileOpen) ? '/LogoWhite.png' : '/Logo.png'}
@@ -139,7 +164,7 @@ export default function Header() {
                         />
                     </a>
 
-                    {/* ── Nav — centered ── */}
+                    {/* Nav */}
                     <nav className="hidden lg:flex items-center" style={{ gap: 6 }}>
                         {navItems.map((item) => (
                             <div
@@ -166,41 +191,54 @@ export default function Header() {
                                     {item.label}
                                     {item.hasMegaMenu && (
                                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                            style={{ transition: 'transform .2s', transform: megaOpen ? 'rotate(180deg)' : 'none' }}>
+                                            style={{ transition: 'transform .3s cubic-bezier(0.16,1,0.3,1)', transform: megaVisible ? 'rotate(180deg)' : 'none' }}>
                                             <path d="M19 9l-7 7-7-7"/>
                                         </svg>
                                     )}
                                 </a>
 
-                                {/* Mega Menu */}
+                                {/* Mega Menu — mounted when open, opacity controlled separately for smooth fade */}
                                 {item.hasMegaMenu && megaOpen && (
-                                    <div onMouseEnter={openMega} onMouseLeave={closeMega} style={{
-                                        position: 'fixed', top: 68, left: 0, right: 0, paddingTop: 4,
-                                        background: scrolled ? '#fff' : 'transparent',
-                                        backdropFilter: 'none',
-                                        WebkitBackdropFilter: 'none',
-                                        borderTop: scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.08)',
-                                        borderBottom: scrolled ? '1px solid rgba(0,0,0,.07)' : '1px solid rgba(255,255,255,.08)',
-                                        boxShadow: 'none',
-                                        zIndex: 100,
-                                    }}>
+                                    <div
+                                        onMouseEnter={openMega}
+                                        onMouseLeave={closeMega}
+                                        style={{
+                                            position: 'fixed', top: 68, left: 0, right: 0,
+                                            background: scrolled ? '#fff' : 'transparent',
+                                            backdropFilter: 'none',
+                                            WebkitBackdropFilter: 'none',
+                                            borderTop: scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.08)',
+                                            borderBottom: scrolled ? '1px solid rgba(0,0,0,.07)' : '1px solid rgba(255,255,255,.06)',
+                                            zIndex: 100,
+                                            // Fade + slight drop
+                                            opacity: megaVisible ? 1 : 0,
+                                            transform: megaVisible ? 'translateY(0)' : 'translateY(-6px)',
+                                            transition: 'opacity 0.3s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1)',
+                                        }}
+                                    >
                                         <div style={{ maxWidth: 1400, margin: '0 auto', padding: '20px clamp(20px,4vw,56px)', display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 0 }}>
                                             {megaMenuItems.map((mi, idx) => (
-                                                <a key={mi.title} href="#"
+                                                <a
+                                                    key={mi.title}
+                                                    href="#"
                                                     style={{
                                                         display: 'flex', alignItems: 'flex-start', gap: 12,
                                                         padding: '14px 18px',
                                                         textDecoration: 'none',
-                                                        borderLeft: idx > 0 ? (scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.1)') : 'none',
-                                                        transition: 'background .15s',
+                                                        borderLeft: idx > 0 ? (scrolled ? '1px solid rgba(0,0,0,.06)' : '1px solid rgba(255,255,255,.08)') : 'none',
+                                                        transition: 'background .2s ease',
+                                                        // Each item fades in with a slight stagger
+                                                        opacity: megaVisible ? 1 : 0,
+                                                        transform: megaVisible ? 'translateY(0)' : 'translateY(4px)',
+                                                        transition: `background .2s ease, opacity 0.3s cubic-bezier(0.16,1,0.3,1) ${idx * 40}ms, transform 0.3s cubic-bezier(0.16,1,0.3,1) ${idx * 40}ms`,
                                                     }}
                                                     onMouseEnter={e => e.currentTarget.style.background = scrolled ? 'rgba(0,0,0,.03)' : 'rgba(255,255,255,.07)'}
                                                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                                                 >
                                                     <div style={{ color: '#5A92BE', flexShrink: 0, marginTop: 2 }}>{mi.icon}</div>
                                                     <div>
-                                                        <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.72rem', fontWeight:400, color: scrolled ? '#1C1917' : 'rgba(255,255,255,.9)', letterSpacing:'.02em', marginBottom: 3 }}>{mi.title}</div>
-                                                        <div style={{ fontFamily:"'Jost',sans-serif", fontSize:'.62rem', fontWeight:300, color: scrolled ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.42)', lineHeight:1.5 }}>{mi.desc}</div>
+                                                        <div style={{ fontFamily: "'Jost',sans-serif", fontSize: '.72rem', fontWeight: 400, color: scrolled ? '#1C1917' : 'rgba(255,255,255,.9)', letterSpacing: '.02em', marginBottom: 3 }}>{mi.title}</div>
+                                                        <div style={{ fontFamily: "'Jost',sans-serif", fontSize: '.62rem', fontWeight: 300, color: scrolled ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.42)', lineHeight: 1.5 }}>{mi.desc}</div>
                                                     </div>
                                                 </a>
                                             ))}
@@ -211,14 +249,11 @@ export default function Header() {
                         ))}
                     </nav>
 
-                    {/* ── Right — phone + hamburger ── */}
+                    {/* Right — phone + hamburger */}
                     <div className="hdr-right">
-                        {/* Mail — desktop only */}
                         <a href="mailto:recepcion.peninsulaoc@gmail.com" className="hidden lg:flex" style={{
                             color: scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)',
-                            textDecoration: 'none',
-                            transition: 'color .2s',
-                            alignItems: 'center',
+                            textDecoration: 'none', transition: 'color .2s', alignItems: 'center',
                         }}
                         onMouseEnter={e => e.currentTarget.style.color = scrolled ? '#1C1917' : '#fff'}
                         onMouseLeave={e => e.currentTarget.style.color = scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)'}
@@ -230,15 +265,11 @@ export default function Header() {
                             </svg>
                         </a>
 
-                        {/* Phone — desktop only */}
                         <a href="tel:6865510099" className="hidden lg:flex" style={{
                             fontFamily: "'Jost', sans-serif",
-                            fontSize: '.72rem', fontWeight: 300,
-                            letterSpacing: '.08em',
+                            fontSize: '.72rem', fontWeight: 300, letterSpacing: '.08em',
                             color: scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)',
-                            textDecoration: 'none',
-                            transition: 'color .2s',
-                            alignItems: 'center', gap: 8,
+                            textDecoration: 'none', transition: 'color .2s', alignItems: 'center', gap: 8,
                         }}
                         onMouseEnter={e => e.currentTarget.style.color = scrolled ? '#1C1917' : '#fff'}
                         onMouseLeave={e => e.currentTarget.style.color = scrolled ? 'rgba(44,40,36,.65)' : 'rgba(255,255,255,.6)'}
@@ -249,7 +280,6 @@ export default function Header() {
                             686 551 0099
                         </a>
 
-                        {/* Hamburger — mobile only */}
                         <button
                             className="lg:hidden"
                             onClick={() => setMobileOpen(!mobileOpen)}
@@ -264,7 +294,6 @@ export default function Header() {
                             </svg>
                         </button>
                     </div>
-
                 </div>
             </div>
 
@@ -274,28 +303,15 @@ export default function Header() {
                     <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {navItems.map((item) => (
                             <a key={item.label} href={item.href || '#'}
-                                style={{ fontFamily:"'Jost',sans-serif", fontSize:'.9rem', fontWeight:300, letterSpacing:'.08em', textTransform:'uppercase', color:'rgba(44,40,36,.75)', padding:'14px 8px', textDecoration:'none', borderBottom:'1px solid rgba(0,0,0,.06)' }}
+                                style={{ fontFamily: "'Jost',sans-serif", fontSize: '.9rem', fontWeight: 300, letterSpacing: '.08em', textTransform: 'uppercase', color: 'rgba(44,40,36,.75)', padding: '14px 8px', textDecoration: 'none', borderBottom: '1px solid rgba(0,0,0,.06)' }}
                                 onClick={() => setMobileOpen(false)}
                             >{item.label}</a>
                         ))}
-
-                        {/* WhatsApp CTA */}
                         <a
                             href="https://wa.me/526865510099?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita%20en%20Pen%C3%ADnsula%20OC."
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            target="_blank" rel="noopener noreferrer"
                             onClick={() => setMobileOpen(false)}
-                            style={{
-                                marginTop: 16,
-                                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-                                padding: '14px 20px',
-                                background: '#0f2a3f',
-                                borderRadius: 12,
-                                textDecoration: 'none',
-                                fontFamily: "'Jost',sans-serif",
-                                fontSize: '.8rem', fontWeight: 400, letterSpacing: '.08em', textTransform: 'uppercase',
-                                color: '#fff',
-                            }}
+                            style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '14px 20px', background: '#0f2a3f', borderRadius: 12, textDecoration: 'none', fontFamily: "'Jost',sans-serif", fontSize: '.8rem', fontWeight: 400, letterSpacing: '.08em', textTransform: 'uppercase', color: '#fff' }}
                         >
                             <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style={{ flexShrink: 0, opacity: 0.85 }}>
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>

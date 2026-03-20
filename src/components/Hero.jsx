@@ -63,20 +63,22 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ── Timing — fully visible by ~2s ──────────────────────────────
-  const W = 180; // ms between words — slower, more deliberate
+  // ── Timing — fully visible by ~2s (desktop) / ~1s (mobile) ──────────────────────────────
+  const isMobile = window.innerWidth < 768;
+  const W = isMobile ? 70 : 180; // ms between words — much faster on mobile
+  const initialDelay = isMobile ? 200 : 500; // start sooner on mobile
   const T = {
     photo:    0,
-    eyebrow:  300,
-    w1:       500,              // Recupera
-    w2:       500 + W,          // lo
-    w3:       500 + W * 2,      // que
-    w4:       500 + W * 3,      // más
-    w5:       500 + W * 4,      // importa.  — done ~820ms
-    // Everything else lands together 300ms after last word
-    rest:     500 + W * 4 + 300, // ~1120ms
+    eyebrow:  isMobile ? 150 : 300,
+    w1:       initialDelay,              // Recupera
+    w2:       initialDelay + W,          // lo
+    w3:       initialDelay + W * 2,      // que
+    w4:       initialDelay + W * 3,      // más
+    w5:       initialDelay + W * 4,      // importa.
+    // Everything else lands together after last word
+    rest:     initialDelay + W * 4 + (isMobile ? 150 : 300),
     // Right side — same moment as rest
-    right:    500 + W * 4 + 300,
+    right:    initialDelay + W * 4 + (isMobile ? 150 : 300),
   };
 
   return (

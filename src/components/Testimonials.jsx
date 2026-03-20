@@ -134,12 +134,16 @@ export default function Testimonials() {
                   { label: 'Diagnóstico', value: t.diagnosis },
                   { label: 'Actividad', value: t.sport },
                   { label: 'Resultado', value: t.timeframe, accent: true },
-                ].map((row, i) => (
-                  <div key={`${current}-${i}`} style={{ padding: '16px 0', borderBottom: '1px solid rgba(0,0,0,.08)', animation: `slideUpIn 0.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.06}s both` }}>
-                    <div style={{ fontFamily: "'Jost', sans-serif", fontSize: '.65rem', fontWeight: 300, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(0,0,0,.35)', marginBottom: 5 }}>{row.label}</div>
-                    <div style={{ fontFamily: "'Jost', sans-serif", fontSize: '.8rem', fontWeight: 400, color: row.accent ? '#4A7EA8' : '#1C1917' }}>{row.value}</div>
-                  </div>
-                ))}
+                ].map((row, i) => {
+                  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                  const delay = isMobile ? i * 0.03 : i * 0.06; // 30ms on mobile vs 60ms on desktop
+                  return (
+                    <div key={`${current}-${i}`} style={{ padding: '16px 0', borderBottom: '1px solid rgba(0,0,0,.08)', animation: `slideUpIn 0.4s cubic-bezier(0.22,1,0.36,1) ${delay}s both` }}>
+                      <div style={{ fontFamily: "'Jost', sans-serif", fontSize: '.65rem', fontWeight: 300, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(0,0,0,.35)', marginBottom: 5 }}>{row.label}</div>
+                      <div style={{ fontFamily: "'Jost', sans-serif", fontSize: '.8rem', fontWeight: 400, color: row.accent ? '#4A7EA8' : '#1C1917' }}>{row.value}</div>
+                    </div>
+                  );
+                })}
               </div>
               <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                 {testimonials.map((_, i) => (

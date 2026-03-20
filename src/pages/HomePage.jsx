@@ -51,23 +51,28 @@ const quickLinks = [
                     </p>
 
                     <div className="mt-12 flex flex-wrap justify-center gap-4">
-                        {quickLinks.map((item, idx) => (
-                            <Link
-                                key={item.name}
-                                to={item.path}
-                                className={`group flex items-center gap-3 bg-white border border-[#D1D5DB] hover:border-[#22D3EE] rounded-2xl px-6 py-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4 cursor-pointer animate-fade-in-up animation-delay-${200 + idx * 100}`}
-                                aria-label={`Ir a especialidad: ${item.name}`}
-                                tabIndex={0}
-                                onMouseEnter={e => e.currentTarget.classList.add('ring-4', 'ring-[#0891B2]')}
-                                onMouseLeave={e => e.currentTarget.classList.remove('ring-4', 'ring-[#0891B2]')}
-                            >
-                                <span className="text-2xl" aria-hidden="true">{item.icon}</span>
-                                <span className="font-semibold text-[#164E63] group-hover:text-[#0891B2] transition-colors">{item.name}</span>
-                                <svg className="w-4 h-4 text-[#D1D5DB] group-hover:text-[#0891B2] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </Link>
-                        ))}
+                        {quickLinks.map((item, idx) => {
+                            const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                            const delay = isMobile ? idx * 0.05 : (200 + idx * 100) / 1000; // 50ms on mobile vs 100ms on desktop
+                            return (
+                                <Link
+                                    key={item.name}
+                                    to={item.path}
+                                    className="group flex items-center gap-3 bg-white border border-[#D1D5DB] hover:border-[#22D3EE] rounded-2xl px-6 py-4 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 focus-visible:outline-[#0891B2] focus-visible:outline focus-visible:outline-4 cursor-pointer animate-fade-in-up"
+                                    style={{ animationDelay: `${delay}s` }}
+                                    aria-label={`Ir a especialidad: ${item.name}`}
+                                    tabIndex={0}
+                                    onMouseEnter={e => e.currentTarget.classList.add('ring-4', 'ring-[#0891B2]')}
+                                    onMouseLeave={e => e.currentTarget.classList.remove('ring-4', 'ring-[#0891B2]')}
+                                >
+                                    <span className="text-2xl" aria-hidden="true">{item.icon}</span>
+                                    <span className="font-semibold text-[#164E63] group-hover:text-[#0891B2] transition-colors">{item.name}</span>
+                                    <svg className="w-4 h-4 text-[#D1D5DB] group-hover:text-[#0891B2] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     <Link

@@ -56,6 +56,11 @@ function CredCard({ item, index }) {
     return () => obs.disconnect();
   }, []);
 
+  // Faster stagger on mobile
+  const isMobile = window.innerWidth < 768;
+  const staggerDelay = isMobile ? index * 0.05 : index * 0.12; // 50ms on mobile vs 120ms on desktop
+  const iconDelay = isMobile ? staggerDelay + 0.08 : staggerDelay + 0.15; // shorter icon delay on mobile
+
   return (
     <div
       ref={ref}
@@ -64,7 +69,7 @@ function CredCard({ item, index }) {
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(20px)',
         transition: visible
-          ? `opacity 0.6s ease ${index * 0.12}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${index * 0.12}s`
+          ? `opacity 0.6s ease ${staggerDelay}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${staggerDelay}s`
           : 'none', // instant reset so replay is clean
       }}
     >
@@ -73,7 +78,7 @@ function CredCard({ item, index }) {
         style={{
           transform: visible ? 'scale(1)' : 'scale(0)',
           transition: visible
-            ? `transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.12 + 0.15}s`
+            ? `transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${iconDelay}s`
             : 'none',
         }}
       >

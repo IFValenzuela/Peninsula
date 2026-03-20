@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
+// Detect mobile viewport
+const isMobile = () => window.innerWidth < 768;
+
 // Shared animation config — change here, changes everywhere
 export const REVEAL = {
   duration: '1.3s',
@@ -54,7 +57,7 @@ export function useReveal(side = 'full') {
  * useRevealStagger — for lists of items, each gets an incremental delay
  * side: 'left' | 'right' | 'full'
  * index: position in the list
- * stagger: ms between each item (default 120ms)
+ * stagger: ms between each item (default 120ms on desktop, 50ms on mobile)
  */
 export function useRevealStagger(side = 'full', index = 0, stagger = 120) {
   const ref = useRef(null);
@@ -75,8 +78,10 @@ export function useRevealStagger(side = 'full', index = 0, stagger = 120) {
     return () => obs.disconnect();
   }, []);
 
-  const baseDelay = side === 'right' ? 200 : 0;
-  const totalDelay = `${(baseDelay + index * stagger) / 1000}s`;
+  // Reduce stagger dramatically on mobile for faster animations
+  const actualStagger = isMobile() ? Math.min(stagger * 0.4, 50) : stagger;
+  const baseDelay = side === 'right' ? (isMobile() ? 100 : 200) : 0;
+  const totalDelay = `${(baseDelay + index * actualStagger) / 1000}s`;
 
   const style = {
     opacity: visible ? 1 : 0,

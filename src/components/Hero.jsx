@@ -63,22 +63,20 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // ── Timing — fully visible by ~2s (desktop) / ~1s (mobile) ──────────────────────────────
-  const isMobile = window.innerWidth < 768;
-  const W = isMobile ? 70 : 180; // ms between words — much faster on mobile
-  const initialDelay = isMobile ? 200 : 500; // start sooner on mobile
+  // ── Timing — fully visible by ~2s ──────────────────────────────
+  const W = 180; // ms between words — slower, more deliberate
   const T = {
     photo:    0,
-    eyebrow:  isMobile ? 150 : 300,
-    w1:       initialDelay,              // Recupera
-    w2:       initialDelay + W,          // lo
-    w3:       initialDelay + W * 2,      // que
-    w4:       initialDelay + W * 3,      // más
-    w5:       initialDelay + W * 4,      // importa.
-    // Everything else lands together after last word
-    rest:     initialDelay + W * 4 + (isMobile ? 150 : 300),
+    eyebrow:  300,
+    w1:       500,              // Recupera
+    w2:       500 + W,          // lo
+    w3:       500 + W * 2,      // que
+    w4:       500 + W * 3,      // más
+    w5:       500 + W * 4,      // importa.  — done ~820ms
+    // Everything else lands together 300ms after last word
+    rest:     500 + W * 4 + 300, // ~1120ms
     // Right side — same moment as rest
-    right:    initialDelay + W * 4 + (isMobile ? 150 : 300),
+    right:    500 + W * 4 + 300,
   };
 
   return (
@@ -116,7 +114,10 @@ export default function Hero() {
             cx-photo-in 1.8s ${EASE} 0s both,
             cx-breathe 18s ease-in-out 2s infinite;
         }
-        .cx-bob   { animation: cx-bob 3.5s ease-in-out infinite; }
+        .cx-photo-pos { object-position: 50% 38%; }
+        @media (max-width: 768px) {
+          .cx-photo-pos { object-position: 75% 38%; }
+        }
         .cx-pulse { animation: cx-pulse 2.5s ease infinite; }
 
         .cx-ghost {
@@ -154,13 +155,13 @@ export default function Hero() {
         ref={photoRef}
         src="/clinic.png"
         alt="Clínica Península OC"
-        className="cx-photo"
+        className="cx-photo cx-photo-pos"
         onError={e => { e.target.src = '/clinic.jpg'; }}
         style={{
           position: 'absolute',
           top: '-10%', left: 0, right: 0,
           width: '100%', height: '120%',
-          objectFit: 'cover', objectPosition: '50% 38%',
+          objectFit: 'cover',
           willChange: 'transform',
           filter: 'brightness(.92) saturate(.8) contrast(1.05)',
         }}

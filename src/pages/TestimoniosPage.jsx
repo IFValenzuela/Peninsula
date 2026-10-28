@@ -1,38 +1,30 @@
 import Testimonials from '../components/Testimonials'
+import PageHeader from '../components/PageHeader'
 
 export default function TestimoniosPage() {
     return (
         <>
-            {/* Page Header */}
-            <section className="pt-28 pb-12 bg-gradient-to-b from-navy to-trust-blue">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-                    <span className="inline-block text-teal font-semibold text-sm tracking-wider uppercase mb-3">
-                        Testimonios
-                    </span>
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-                        Historias de Regreso
-                    </h1>
-                    <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
-                        Cada paciente tiene una historia de superación. Estas son algunas de las que nos inspiran cada día.
-                    </p>
-                </div>
-            </section>
+            <PageHeader
+                surface="white"
+                title="Historias de regreso"
+                lead="Cada paciente tiene una historia de superación. Estas son algunas de las que nos inspiran cada día."
+            />
 
             <Testimonials />
 
             {/* Trust stats */}
-            <section className="py-20 bg-white">
+            <section className="py-20 md:py-28 bg-white">
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
                         {[
-                            { value: '98%', label: 'Satisfacción del Paciente' },
-                            { value: '5,000+', label: 'Cirugías Exitosas' },
-                            { value: '15+', label: 'Años de Experiencia' },
-                            { value: '100%', label: 'Especialistas Certificados' },
+                            { value: '98%', label: 'Satisfacción del paciente' },
+                            { value: '3,500+', label: 'Cirugías realizadas' },
+                            { value: '15+', label: 'Años de experiencia' },
+                            { value: '100%', label: 'Especialistas certificados' },
                         ].map((s) => (
-                            <div key={s.label}>
-                                <div className="text-4xl font-bold text-teal">{s.value}</div>
-                                <div className="text-gray-500 text-sm mt-2">{s.label}</div>
+                            <div key={s.label} className="border-t border-ink/15 pt-6">
+                                <div className="t-num text-5xl text-ink">{s.value}</div>
+                                <div className="t-small text-muted mt-3">{s.label}</div>
                             </div>
                         ))}
                     </div>

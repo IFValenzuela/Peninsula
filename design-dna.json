@@ -1,0 +1,406 @@
+{
+  "meta": {
+    "name": "Península OC — Editorial Clinical",
+    "description": "Rev 3 (2026-10-27): rebuilt from research of studio-built clinic sites (Neko Health, Parsley Health, Superpower, Schulthess Klinik, Fortius Clinic) on top of the owner's valenzuelayaguilar.com taste.",
+    "source_references": [
+      "https://valenzuelayaguilar.com/",
+      "https://www.nekohealth.com/",
+      "https://www.parsleyhealth.com/",
+      "https://superpower.com/",
+      "https://www.schulthess-klinik.ch/en",
+      "https://www.fortiusclinic.com/"
+    ],
+    "created_at": "2026-10-27"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic with a single cool accent",
+      "primary": {
+        "hex": "#3F6F96",
+        "role": "clinical blue — filled buttons, hover fills, selection, small accents"
+      },
+      "secondary": {
+        "hex": "#E6EDF4",
+        "role": "tint — cool alternate section surface; must read as clearly different from paper (old #F3F4F5 merged with white)"
+      },
+      "accent": {
+        "hex": "#5A92BE",
+        "role": "brand teal — italic headline word on dark photos, sparing highlights (reference role: gold #c9a86c)"
+      },
+      "neutral": {
+        "scale": [
+          "#FFFFFF",
+          "#E6EDF4",
+          "#E3E6EA",
+          "#5B6470",
+          "#2E3440",
+          "#0A1628"
+        ],
+        "usage": "paper, mist tint (alternate light surface), hairlines, muted text, body text, ink headings"
+      },
+      "semantic": {
+        "success": "#2F7D4F",
+        "warning": "#B7791F",
+        "error": "#B91C1C",
+        "info": "#3F6F96"
+      },
+      "surface": {
+        "background": "#FFFFFF",
+        "card": "white tile on tint, or translucent tile on navy; 4px radius, no shadow",
+        "elevated": "#FFFFFF with 1px #E3E6EA border"
+      },
+      "contrast_strategy": "light site: sections alternate paper #FFFFFF / mist #E6EDF4. Navy #0A1628 is used ONLY as the footer surface (and as ink text). Home hero is the only dark photo area."
+    },
+    "typography": {
+      "type_scale": {
+        "display": {
+          "size": "clamp(3rem, 6.5vw, 6.5rem)",
+          "weight": "400",
+          "line_height": "1.02",
+          "tracking": "-0.02em"
+        },
+        "heading_1": {
+          "size": "2.375rem → 3.25rem (md)",
+          "weight": "400",
+          "line_height": "1.1",
+          "tracking": "0.005em"
+        },
+        "heading_2": {
+          "size": "1.75rem → 2.125rem (md) → 2.5rem (lg)",
+          "weight": "400",
+          "line_height": "1.2",
+          "tracking": "-0.005em"
+        },
+        "heading_3": {
+          "size": "1.375rem → 1.5rem (md)",
+          "weight": "400",
+          "line_height": "1.3",
+          "tracking": "0"
+        },
+        "body": {
+          "size": "16px mobile / 17px ≥1024px",
+          "weight": "400",
+          "line_height": "1.65",
+          "tracking": "0"
+        },
+        "body_small": {
+          "size": "16px (.t-small) — the smallest reading size",
+          "weight": "400",
+          "line_height": "1.6",
+          "tracking": "0"
+        },
+        "caption": {
+          "size": "15px (nav, footer headings, testimonial controls, copyright)",
+          "weight": "400–500",
+          "line_height": "1.5",
+          "tracking": "0"
+        },
+        "overline": {
+          "size": "14px uppercase (.kicker) — the only text under 15px",
+          "weight": "500",
+          "line_height": "1.4",
+          "tracking": "0.1em"
+        }
+      },
+      "font_families": {
+        "heading": "Newsreader (h1–h3, figures, quotes only)",
+        "body": "Hanken Grotesk 400/500 (body, nav, buttons, labels, lists)",
+        "mono": "none"
+      },
+      "font_style_notes": "Serif display + neutral grotesk, as on Neko/Parsley. No italics. Emphasis = weight/tone contrast. Sentence case everywhere, including data. Body 16px; nothing under 13px."
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": [
+        "4",
+        "8",
+        "12",
+        "16",
+        "20",
+        "24",
+        "32",
+        "40",
+        "48",
+        "64",
+        "80",
+        "112"
+      ],
+      "content_density": "spacious",
+      "section_rhythm": "64px mobile / 80–96px desktop; surfaces alternate (home: photo → paper strip → navy → paper → tint → navy footer)"
+    },
+    "layout": {
+      "grid_system": "12-col fluid container",
+      "max_content_width": "1400px",
+      "columns": "2–5 equal columns per section",
+      "gutter": "20px → 32px → 48px",
+      "breakpoints": [
+        "640",
+        "768",
+        "1024",
+        "1280"
+      ],
+      "alignment_tendency": "mixed — centered statements, left-aligned content grids"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "2px",
+        "medium": "4px",
+        "large": "8px",
+        "pill": "never"
+      },
+      "border_usage": "1px hairlines; tiles use a 1px border only on navy",
+      "divider_style": "1px #E3E6EA rules on top of list items and between columns; thin vertical bars between inline items"
+    },
+    "elevation": {
+      "shadow_style": "none",
+      "levels": {
+        "low": "none",
+        "medium": "none",
+        "high": "none"
+      },
+      "depth_cues": "full-bleed photography and color blocks, never drop shadows"
+    },
+    "iconography": {
+      "style": "No arrows, chevrons or content icons anywhere (user rule: arrows read as generic). Only functional glyphs: phone, mail, WhatsApp, menu.",
+      "stroke_weight": "1.5",
+      "size_scale": [
+        "16",
+        "20",
+        "24"
+      ],
+      "preferred_set": "inline SVG for those four glyphs only"
+    },
+    "motion": {
+      "easing": "cubic-bezier(.22, 1, .36, 1) everywhere (REVEAL.ease in useReveal.js = --ease-out-soft in index.css)",
+      "duration_scale": {
+        "micro": "200–300ms (colors, buttons, header)",
+        "normal": "400ms (hover underline draw), 800ms (scroll reveals)",
+        "macro": "1100ms headline line masks, 1.8s hero photo entrance"
+      },
+      "entrance_pattern": "One recipe: opacity 0→1 + translateY(16px)→0, 800ms, plays ONCE (useInViewOnce). Lists stagger 60ms per item. Headlines rise from an overflow mask (1100ms).",
+      "exit_pattern": "none — revealed content never hides again",
+      "philosophy": "minimal, cinematic"
+    },
+    "components": {
+      "button_style": "48px, 4px radius, 15px Hanken Grotesk 500; primary = clinical blue fill, outline = ink hairline that fills blue on hover, white on photos. Never navy fills.",
+      "input_style": "48px tall, 1px hairline border, 4px radius, white fill, ink border on focus",
+      "card_style": "No boxed cards. Doctors: identical portrait cards (photo, serif name, sans specialty, hairline credential rows, 'Ver perfil →'). Services: index rows (serif name · conditions · circular arrow).",
+      "navigation_pattern": "transparent fixed header over hero turning white on scroll; logo / centered links / phone",
+      "modal_style": "n/a",
+      "list_style": "hairline rows; whole row is the link, name turns clinical blue and its 'Consultar' line draws on hover",
+      "component_notes": "Navigation cues are typographic: `.link-line` — a 28% hairline under a 500-weight label that the clinical blue draws across on hover (0.6s ease-out-soft). Used for 'Consultar', 'Ver perfil', 'Anterior / Siguiente', 'Volver al equipo'."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": [
+        "calm",
+        "assured",
+        "warm",
+        "established"
+      ],
+      "visual_metaphor": "a well-set printed brochure",
+      "era_influence": "contemporary editorial",
+      "genre": "luxury editorial service business",
+      "personality_traits": [
+        "confident",
+        "quiet",
+        "trustworthy"
+      ],
+      "adjectives": [
+        "restrained",
+        "typographic",
+        "photographic",
+        "unboxed"
+      ]
+    },
+    "visual_language": {
+      "complexity": "minimal",
+      "ornamentation": "none",
+      "whitespace_usage": "generous",
+      "visual_weight_distribution": "heavy photography in hero/bands, light typographic sections between",
+      "focal_strategy": "single hero element per section",
+      "contrast_level": "high on text, low on surfaces",
+      "texture_usage": "photo desaturation only"
+    },
+    "composition": {
+      "hierarchy_method": "scale and weight/tone contrast within one serif family (never italics)",
+      "balance_type": "symmetric statements, asymmetric content",
+      "flow_direction": "top-down",
+      "grouping_strategy": "alternating surfaces between sections; hairlines and flat tiles within",
+      "negative_space_role": "signals premium and calm"
+    },
+    "imagery": {
+      "photo_treatment": "saturate(.7–.8) brightness(.85), dark gradient for legibility",
+      "illustration_style": "none",
+      "graphic_elements": "none",
+      "pattern_usage": "none",
+      "image_shape": "square corners"
+    },
+    "interaction_feel": {
+      "feedback_style": "color/underline shifts",
+      "hover_behavior": "underline to full opacity, slow 1.03 image zoom, button fill swap",
+      "transition_personality": "soft ease-out",
+      "loading_style": "none",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "warm, direct, factual — every claim traceable to doctors.js (no 'avales', no unsupported numbers)",
+      "formality": "tú, conversational professional",
+      "cta_style": "short verb phrases: 'Agendar consulta', 'Ver perfil'",
+      "empty_state_approach": "n/a",
+      "error_tone": "plain"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "subtle",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "prefers-reduced-motion disables all motion",
+      "primary_technology": "CSS transitions + IntersectionObserver"
+    },
+    "background_effects": {
+      "type": "none",
+      "description": "none",
+      "technology": "none",
+      "params": {
+        "color_palette": "n/a",
+        "speed": "n/a",
+        "density": "n/a",
+        "opacity": "n/a",
+        "blend_mode": "n/a"
+      }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "technology": "none",
+      "params": {
+        "count": 0,
+        "shape": "n/a",
+        "size_range": "n/a",
+        "movement_pattern": "n/a",
+        "color_behavior": "n/a",
+        "interaction": "n/a",
+        "spawn_area": "n/a"
+      }
+    },
+    "3d_elements": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "technology": "none",
+      "params": {
+        "renderer": "n/a",
+        "lighting": "n/a",
+        "camera": "n/a",
+        "materials": "n/a",
+        "geometry": "n/a",
+        "post_processing": "n/a",
+        "interaction_model": "n/a"
+      }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "technology": "none",
+      "params": {
+        "uniforms": "n/a",
+        "vertex_manipulation": "n/a",
+        "fragment_output": "n/a",
+        "noise_type": "n/a",
+        "distortion": "n/a"
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": false,
+        "layers": 0,
+        "depth_range": "none — replaced by the curtain",
+        "speed_curve": "n/a"
+      },
+      "scroll_triggered_animations": {
+        "enabled": true,
+        "trigger_points": "10–30% visible, first time only",
+        "animation_type": "fade-up 16px, 800ms",
+        "scrub_behavior": "triggered once"
+      },
+      "scroll_morphing": {
+        "enabled": true,
+        "description": "Curtain hero (as on valenzuelayaguilar.com): hero is position:sticky with top:min(0px, 100svh - var(--curtain-h)); every following section is position:relative z-index:1 with its own solid background and slides up over it. ResizeObserver sets --curtain-h. Disabled under prefers-reduced-motion."
+      }
+    },
+    "text_effects": {
+      "type": "split-line mask reveal",
+      "description": "each headline line translates up from 106% inside overflow:hidden",
+      "technology": "CSS transform",
+      "params": {
+        "split_strategy": "line",
+        "animation_per_unit": "translateY(106%) → 0",
+        "stagger": "120ms",
+        "effect_style": "clean; highlight line is heavier weight, not italic"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "params": {
+        "shape": "n/a",
+        "size": "n/a",
+        "blend_mode": "n/a",
+        "trail": "n/a",
+        "interaction_zone": "n/a"
+      }
+    },
+    "image_effects": {
+      "type": "tone + zoom",
+      "description": "desaturated photos; hover zoom to 1.03 over 900ms",
+      "technology": "CSS filter/transform",
+      "params": {
+        "filter_pipeline": "saturate(.7) brightness(.85)",
+        "hover_transform": "scale(1.03)",
+        "reveal_animation": "fade from scale 1.06",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false,
+      "style": "none",
+      "params": {
+        "blur_radius": "n/a",
+        "transparency": "n/a",
+        "border_treatment": "n/a",
+        "shadow_type": "n/a",
+        "light_source_angle": "n/a"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "technology": "none",
+      "params": {
+        "draw_method": "n/a",
+        "animation_loop": "n/a",
+        "color_scheme": "n/a",
+        "responsiveness": "n/a",
+        "interaction": "n/a"
+      }
+    },
+    "svg_animations": {
+      "enabled": false,
+      "type": "none",
+      "description": "none",
+      "params": {
+        "animation_method": "n/a",
+        "path_morphing": "n/a",
+        "stroke_animation": "n/a",
+        "filter_effects": "n/a"
+      }
+    },
+    "composite_notes": "Premium feel comes from restraint: one serif, no shadows, no pills, no italics, no decorative icons. One bold moment per page (home: navy body-area tiles that invert on hover)."
+  }
+}

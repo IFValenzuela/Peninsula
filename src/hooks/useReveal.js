@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 
-// Detect mobile viewport
-const isMobile = () => window.innerWidth < 768;
+// Check reduced motion preference
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Shared animation config — change here, changes everywhere
+// Shared animation config — every scroll reveal on the site uses these values
 export const REVEAL = {
-  duration: '1.3s',
-  ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
-  distance: '24px',
-  // Left side delay, right side delay
-  leftDelay: '0s',
-  rightDelay: '0.2s',
+  duration: '800ms',
+  ease: 'cubic-bezier(0.22, 1, 0.36, 1)', // same curve as --ease-out-soft in index.css
+  distance: '16px',
+  stagger: 60, // ms between items in a list
 };
 
 /**
- * useReveal — fires every time the element enters the viewport
- * side: 'left' | 'right' | 'full' (no left/right distinction)
+ * useInViewOnce — true from the first time the element enters the viewport, and stays true.
+ * Content never hides again once seen, so scrolling back up doesn't replay anything.
  */
-export function useReveal(side = 'full') {
+export function useInViewOnce(threshold = 0.12) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -27,69 +27,42 @@ export function useReveal(side = 'full') {
 
     const obs = new IntersectionObserver(
       ([entry]) => {
-        setVisible(entry.isIntersecting);
+        if (!entry.isIntersecting) return;
+        setVisible(true);
+        obs.disconnect();
       },
-      { threshold: 0.12 }
+      { threshold }
     );
 
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [threshold]);
 
-  const delay = side === 'right'
-    ? REVEAL.rightDelay
-    : side === 'left'
-    ? REVEAL.leftDelay
-    : '0s';
+  return [ref, visible];
+}
 
-  const style = {
+// Fade + rise, optionally delayed (ms)
+export function revealStyle(visible, delayMs = 0) {
+  if (prefersReducedMotion()) return { opacity: 1 };
+  const t = `${REVEAL.duration} ${REVEAL.ease} ${delayMs}ms`;
+  return {
     opacity: visible ? 1 : 0,
     transform: visible ? 'translateY(0)' : `translateY(${REVEAL.distance})`,
-    transition: visible
-      ? `opacity ${REVEAL.duration} ${REVEAL.ease} ${delay}, transform ${REVEAL.duration} ${REVEAL.ease} ${delay}`
-      : 'none', // instant reset so it's ready to replay cleanly
+    transition: `opacity ${t}, transform ${t}`,
   };
+}
 
-  return [ref, style];
+/** useReveal — a single block that fades up once when it first enters the viewport */
+export function useReveal() {
+  const [ref, visible] = useInViewOnce(0.12);
+  return [ref, revealStyle(visible)];
 }
 
 /**
- * useRevealStagger — for lists of items, each gets an incremental delay
- * side: 'left' | 'right' | 'full'
+ * useRevealStagger — one item of a list; each item starts REVEAL.stagger ms after the previous
  * index: position in the list
- * stagger: ms between each item (default 120ms on desktop, 50ms on mobile)
  */
-export function useRevealStagger(side = 'full', index = 0, stagger = 120) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        setVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  // Reduce stagger dramatically on mobile for faster animations
-  const actualStagger = isMobile() ? Math.min(stagger * 0.4, 50) : stagger;
-  const baseDelay = side === 'right' ? (isMobile() ? 100 : 200) : 0;
-  const totalDelay = `${(baseDelay + index * actualStagger) / 1000}s`;
-
-  const style = {
-    opacity: visible ? 1 : 0,
-    transform: visible ? 'translateY(0)' : `translateY(${REVEAL.distance})`,
-    transition: visible
-      ? `opacity ${REVEAL.duration} ${REVEAL.ease} ${totalDelay}, transform ${REVEAL.duration} ${REVEAL.ease} ${totalDelay}`
-      : 'none',
-  };
-
-  return [ref, style];
+export function useRevealStagger(index = 0) {
+  const [ref, visible] = useInViewOnce(0.1);
+  return [ref, revealStyle(visible, index * REVEAL.stagger)];
 }
